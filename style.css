@@ -1,0 +1,25 @@
+header ul {
+    width: 1200px;
+    margin: 20px auto;
+}
+header ul li {
+    display: inline-block;
+}
+
+header ul li:first-child {
+    margin-right: 30px;
+}
+
+header ul li:last-child {
+    margin-left: 30px;
+}
+
+main ul li {
+    display: inline-block;
+    margin: 30px;
+}
+
+main ul {
+    text-align: center;
+}
+
