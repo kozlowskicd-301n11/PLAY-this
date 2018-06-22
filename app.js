@@ -42,7 +42,7 @@ var makeCssCards = function() {
 // display cards
 
 var displayCards = function() {
-    for (var i = 0; i <allCards.length; i++) {
+    {
         var ele = document.getElementById('card-deck');
         ele.src = 'http://placehold.it/220x300/12345';
     }
