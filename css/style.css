@@ -1,3 +1,23 @@
+nav {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    text-align: center;
+    
+}
+nav a {
+    display: block;
+    height: 36px;
+    width: 120px;
+    color: aliceblue;
+    border: solid black 1px;
+    background-color: grey;
+    padding-top: 12px;
+    border-radius: 8px;
+}
+nav a:first-child {
+    border-bottom: none;
+}
 header ul {
     width: 960px;
     margin: 0px auto;
