@@ -23,3 +23,13 @@ main ul {
     text-align: center;
 }
 
+
+#card1, #card2, #card3, #card4, #card5{
+    background-color: red;
+    /* transform: translate(0px, 0px) rotate(360deg); */
+    transition: transform .5s ease-in-out 0.1s;
+}
+main ul li{ 
+    height: 220px;
+    background-color: red;
+}
