@@ -1,3 +1,23 @@
+nav {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    text-align: center;
+    
+}
+nav a {
+    display: block;
+    height: 36px;
+    width: 120px;
+    color: aliceblue;
+    border: solid black 1px;
+    background-color: grey;
+    padding-top: 12px;
+    border-radius: 8px;
+}
+nav a:first-child {
+    border-bottom: none;
+}
 header ul {
     width: 960px;
     margin: 0px auto;
@@ -26,9 +46,6 @@ main ul {
 }
 main ul li {
     display: inline-block;
-    background-color: forestgreen;
-    width: 176px;
-    height: 220px;
     margin: 0px 7px;
 }
 main ul li:first-child {
@@ -36,4 +53,31 @@ main ul li:first-child {
 }
 main ul li:last-child {
     margin: 0px 0px 0px 10px
+}
+#card1, #card2, #card3, #card4, #card5{
+    background-color: red;
+    height: 270px;
+    width: 176px;
+    /* transform: translate(0px, 0px) rotate(360deg); */
+    transition: transform .5s ease-in-out 0.1s;
+}
+main ul li{ 
+    display: inline-block;
+    height: 270px;
+    background-color: red;
+}
+/*  */
+
+#card-deck{
+    height: 270px;
+    width: 176px;
+}
+#questions-field{
+    height: 350px;
+    width: 540px;
+}
+#card-choice{
+    border: 10px groove #e3e3e3;
+    height: 270px;
+    width: 174px;
 }
