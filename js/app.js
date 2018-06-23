@@ -1,4 +1,13 @@
 'use strict'
+//======== Nav-Bar JS =======//
+
+function toggleSideBar(ref) {
+    ref.classList.toggle('active');
+    document.getElementById('sidebar').classList.toggle('active');
+
+};
+
+//======== End Nav Bar JS =====//
 var allCards = [];
 
 var Card = function(index,filePath, language) {
