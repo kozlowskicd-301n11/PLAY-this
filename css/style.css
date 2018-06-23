@@ -90,16 +90,6 @@ header ul {
 header ul li {
     display: inline-block;
 }
-#card-deck {
-    margin-right: 10px;
-}
-#questions-field {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-#card-choice {
-    margin-left: 10px;
-}
 main ul {
     width: 960px;
     margin: 40px auto 0px auto;
@@ -110,6 +100,8 @@ main ul {
 main ul li {
     display: inline-block;
     margin: 0px 7px;
+    height: 270px;
+    background-color: #585555
 }
 main ul li:first-child {
     margin: 0px 10px 0px 0px
@@ -123,11 +115,6 @@ main ul li:last-child {
     width: 176px;
     /* transform: translate(0px, 0px) rotate(360deg); */
     transition: transform .5s ease-in-out 0.1s;
-}
-main ul li{ 
-    display: inline-block;
-    height: 270px;
-    background-color: #585555
 }
 #card-deck {
     border: 1px black solid;
