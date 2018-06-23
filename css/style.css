@@ -1,25 +1,38 @@
 header ul {
-    width: 1200px;
-    margin: 20px auto;
+    width: 960px;
+    margin: 0px auto;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 header ul li {
     display: inline-block;
 }
-
-header ul li:first-child {
-    margin-right: 30px;
+#card-deck {
+    margin-right: 10px;
 }
-
-header ul li:last-child {
-    margin-left: 30px;
+#questions-field {
+    margin-left: 10px;
+    margin-right: 10px;
 }
-
+#card-choice {
+    margin-left: 10px;
+}
+main ul {
+    width: 960px;
+    margin: 20px auto;
+    padding-left: 10%;
+    padding-right: 10%;
+}
 main ul li {
     display: inline-block;
-    margin: 30px;
 }
-
-main ul {
-    text-align: center;
+#card1 {
+    margin-right: 8px;
 }
-
+#card2, #card3, #card4 {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+#card5 {
+    margin-left: 8px;
+}
