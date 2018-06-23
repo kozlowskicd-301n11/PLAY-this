@@ -19,20 +19,21 @@ header ul li {
 }
 main ul {
     width: 960px;
-    margin: 20px auto;
+    margin: 80px auto;
     padding-left: 10%;
     padding-right: 10%;
+    list-style-type: none;
 }
 main ul li {
     display: inline-block;
+    background-color: forestgreen;
+    width: 176px;
+    height: 220px;
+    margin: 0px 7px;
 }
-#card1 {
-    margin-right: 8px;
+main ul li:first-child {
+    margin: 0px 10px 0px 0px
 }
-#card2, #card3, #card4 {
-    margin-left: 8px;
-    margin-right: 8px;
-}
-#card5 {
-    margin-left: 8px;
+main ul li:last-child {
+    margin: 0px 0px 0px 10px
 }
