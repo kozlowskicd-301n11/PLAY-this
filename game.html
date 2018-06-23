@@ -7,10 +7,20 @@
 </head>
 <body>
     <nav>
-        <a id="homepage-link" href="index.html">Homepage</a>
-        <a id="game-link" href="game.html">Play the Game!</a>
-        <a id="about-us-link" href="about.html">About Us</a>
-    </nav>
+        <div id="sidebar">
+            <ul>
+                <li>Main</li>
+                <li>Game</li>
+                <li>Scores</li>
+                <li>About Us</li>
+            </ul>
+        </div>
+        <div id="toggle-btn" onclick="toggleSideBar(this)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+   </nav>
    <header>
        <ul>
            <li><img id="card-deck"src="http://placehold.it/176x220/000"/></li>
