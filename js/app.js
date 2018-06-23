@@ -1,4 +1,15 @@
 'use strict'
+
+//======== Nav-Bar JS =======//
+
+function toggleSideBar(ref) {
+    ref.classList.toggle('active');
+    document.getElementById('sidebar').classList.toggle('active');
+
+};
+
+//======== End Nav Bar JS =====//
+
 var allCards = [];
 
 var Card = function(index, language, content, img) {
@@ -31,7 +42,8 @@ var cssCardContent = [
     'font-family:',
     'background-color:',
     'line-height:',
-    'font-weight:']
+    'font-weight:'
+]
 var makeCssCards = function() {
     for (var i = 0; i < cssCardContent.length; i++) {
         new Card(i, 'css', cssCardContent[i], 'http://placehold.it/220x300/444');
@@ -41,16 +53,16 @@ var makeCssCards = function() {
 // display cards
 
 var displayCards = function() {
-    {
-        var ele = document.getElementById('card-deck');
-        ele.src = 'http://placehold.it/150x200/12345';
-        for (var i = 0; i < 5; i++) {
-            var ele = document.getElementById('card' + String(i+1))
+        {
+            var ele = document.getElementById('card-deck');
             ele.src = 'http://placehold.it/150x200/12345';
+            for (var i = 0; i < 5; i++) {
+                var ele = document.getElementById('card' + String(i + 1))
+                ele.src = 'http://placehold.it/150x200/12345';
+            }
         }
     }
-}
-// Form Handler for username
+    // Form Handler for username
 
 // Question and Answer Constructor--------------------------------
 //  needs to create question in the question-field id
@@ -72,4 +84,3 @@ var displayCards = function() {
 //  display username
 //  display highscores
 //  display explanation after answering question
-
