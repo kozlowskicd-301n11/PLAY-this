@@ -14,6 +14,11 @@ var Question = function(index, filePath, language){ // should add a parameter
     this.index = index;
     this.filePath = filePath;
     this.language = language;
+    this.cards = [];
+    this.fillCards = function(){
+        
+    }
+    //protyope shuffle check for first 5 splice
     Question.allQuestions.push(this);
 }
 Question.allQuestions = [];
@@ -63,8 +68,9 @@ function displayDeck(){ // displaying the deck card color accordingly
     }
 }
 displayDeck();
-// allCards = [];
-shuffling(allCards);
+//set correct answer func 
+//while not in first 5 call shuffle
+// shuffling(allCards); 
 // display cards
 var displayCards = function() {
     if(Question.allQuestions[0]){
@@ -72,6 +78,9 @@ var displayCards = function() {
             for(var j = 1; j <= allCards.length-3; j++){
                 var cardEl = document.getElementById('card'+j);
                 cardEl.src = allCards[j].filePath;
+                // if(allCards[j].filePath != ){
+
+                // }
                 // 'img/js-a-1-'+j+'.png';
             }
         // }
@@ -211,3 +220,12 @@ function moveBack(card){
 //     }
 // }
 
+//======== Nav-Bar JS =======//
+
+function toggleSideBar(ref) {
+    ref.classList.toggle('active');
+    document.getElementById('sidebar').classList.toggle('active');
+
+};
+
+//======== End Nav Bar JS =====//
