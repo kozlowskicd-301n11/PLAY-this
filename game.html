@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Page Title</title>
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
-    
+
 </head>
+
 <body>
     <nav>
         <div id="sidebar">
             <ul>
-                <li>Main</li>
-                <li>Game</li>
-                <li>Scores</li>
-                <li>About Us</li>
+                <li><a href="index.html">Main</a></li>
+                <li><a href="game.html">Game</a></li>
+                <li><a href="scores.html">Scores</a></li>
+                <li><a href="about.html">About Us</a></li>
             </ul>
         </div>
         <div id="toggle-btn" onclick="toggleSideBar(this)">
@@ -20,24 +22,24 @@
             <span></span>
             <span></span>
         </div>
-   </nav>
-   <header>
-       <ul>
-           <li><img id="card-deck"src="http://placehold.it/176x220/000"/></li>
-           <li><img id="questions-field"src="http://placehold.it/540x350/red"/></li>
-           <li><img id="card-choice"src="http://placehold.it/194x290/red"/></li>
-       </ul>
+    </nav>
+    <header>
+        <ul>
+            <li><img id="card-deck" src="http://placehold.it/176x220/000" /></li>
+            <li><img id="questions-field" src="http://placehold.it/540x350/red" /></li>
+            <li><img id="card-choice" src="http://placehold.it/194x290/red" /></li>
+        </ul>
     </header>
     <main>
-        <ul id = 'cards'>
-           <li><img onclick= "cardmove('card1', '975px', '-293px')" id="card1" src="http://placehold.it/176x270/000"/></li>
-           <li><img onclick= "cardmove('card2', '760px', '-293px')" id="card2" src="http://placehold.it/176x270/000"/></li>
-           <li><img onclick= "cardmove('card3', '547px', '-293px')" id="card3" src="http://placehold.it/176x270/000"/></li>
-           <li><img onclick= "cardmove('card4', '333px', '-293px')" id="card4" src="http://placehold.it/176x270/000"/></li>
-           <li><img onclick= "cardmove('card5', '120px', '-293px')" id="card5" src="http://placehold.it/176x270/000"/></li>
+        <ul id='cards'>
+            <li><img onclick="cardmove('card1', '975px', '-293px')" id="card1" src="http://placehold.it/176x270/000" /></li>
+            <li><img onclick="cardmove('card2', '760px', '-293px')" id="card2" src="http://placehold.it/176x270/000" /></li>
+            <li><img onclick="cardmove('card3', '547px', '-293px')" id="card3" src="http://placehold.it/176x270/000" /></li>
+            <li><img onclick="cardmove('card4', '333px', '-293px')" id="card4" src="http://placehold.it/176x270/000" /></li>
+            <li><img onclick="cardmove('card5', '120px', '-293px')" id="card5" src="http://placehold.it/176x270/000" /></li>
         </ul>
     </main>
-    <footer></footer>    
+    <footer></footer>
     <script src="js/app.js"></script>
 </body>
 
