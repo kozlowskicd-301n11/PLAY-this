@@ -10,18 +10,24 @@ function toggleSideBar(ref) {
 //======== End Nav Bar JS =====//
 var allCards = [];
 
-var Card = function(index,filePath, language) {
+var Card = function(index, filePath, language, correctAnswer) {
     this.index = index; // index number to track all cards
     this.filePath = filePath;
     this.language = language; // html, js, css
+    this.correctAnswer = correctAnswer;
     allCards.push(this);
 }
 ////////////////////////////////////////////////
 
-var Question = function(index, filePath, language){
+var Question = function(index, filePath, language){ // should add a parameter 
     this.index = index;
     this.filePath = filePath;
     this.language = language;
+    this.cards = [];
+    this.fillCards = function(){
+        
+    }
+    //protyope shuffle check for first 5 splice
     Question.allQuestions.push(this);
 }
 Question.allQuestions = [];
@@ -32,8 +38,8 @@ function genQuestionCard(){
 genQuestionCard();
 function genAllCard (){
     //question 1 card
-    for(var i = 0; i <7; i++){
-        new Card(1,'img/js-a-1-'+i+'.png', 'JS');
+    for(var i = 1; i < 9; i++){
+        new Card(1,'img/js-a-1-'+i+'.png', 'JS', false);
     }
    
 }
@@ -47,8 +53,14 @@ function displayQuestion(){
 }
 displayQuestion();
 
-
-
+function setTrueAnswer(){ // setting boolean to true if answer is correct
+    for(var i = 0; i < allCards.length; i++){ // Checking Question #1
+        if(allCards[i].filePath === 'img/js-a-1-2.png'){
+            allCards[i].correctAnswer = true;
+        }
+    }
+}
+setTrueAnswer();
 
 
 
@@ -65,34 +77,49 @@ function displayDeck(){ // displaying the deck card color accordingly
     }
 }
 displayDeck();
-// allCards = [];
-// shuffle(allCards);
+//set correct answer func 
+//while not in first 5 call shuffle
+// shuffling(allCards); 
 // display cards
 var displayCards = function() {
     if(Question.allQuestions[0]){
-        for(var i = 1; i < allCards.length-1; i++){
-            var cardEl = document.getElementById('card'+i);
-            cardEl.src = 'img/js-a-1-'+i+'.png';
-        }
+        // for(var i = 1; i< 6; i++){
+            for(var j = 1; j <= allCards.length-3; j++){
+                var cardEl = document.getElementById('card'+j);
+                cardEl.src = allCards[j].filePath;
+                // if(allCards[j].filePath != ){
+
+                // }
+                // 'img/js-a-1-'+j+'.png';
+            }
+        // }
     }
 }
 displayCards();
-// working on shuffling!
-// function shuffling( array ){
-//     var count = array.length,
-//         randomnumber,
-//         temp;
-//     while( count ){
-//      randomnumber = Math.random() * count-- | 0;
-//      temp = array[count];
-//      array[count] = array[randomnumber];
-//      array[randomnumber] = temp
-//     }
-//     // allCards.push(this);
-// }
+
+function shuffling( array ){
+    var count = array.length,
+        randomnumber,
+        temp;
+    while( count ){
+     randomnumber = Math.random() * count-- | 0;
+     temp = array[count];
+     array[count] = array[randomnumber];
+     array[randomnumber] = temp
+    }
+    // allCards.push(this);
+}
 
 // make a randomizer !!!
 // look on how to change image using java to manipulate CSS
+
+
+
+
+
+
+
+
 
 
 
@@ -201,3 +228,16 @@ function moveBack(card){
 //         cardmove(card, x, y)
 //     }
 // }
+<<<<<<< HEAD
+=======
+
+//======== Nav-Bar JS =======//
+
+function toggleSideBar(ref) {
+    ref.classList.toggle('active');
+    document.getElementById('sidebar').classList.toggle('active');
+
+};
+
+//======== End Nav Bar JS =====//
+>>>>>>> 8d522af25544dad0859e630c5c3f1968eff14267
