@@ -16,32 +16,48 @@ var Card = function(Aindex, filePath, language) {
     this.Aindex = Aindex; // index number to track all cards
     this.filePath = filePath;
     this.language = language; // html, js, css
-    allQuestions[0].answerCards.push(this); // Testing for the first value of array [0] will end up put in a loop or so to push all
+    allQuestions[this.Aindex - 1].answerCards.push(this); // Testing for the first value of array [0] will end up put in a loop or so to push all
 }
 
 // Generating Question card
 function genQuestionCard(){
     new Question(1,'img/js-q-1.png', 'JS');
+    new Question(2, 'img/js-q-2.png', 'JS');
+    new Question(3, 'img/js-q-3.png', 'JS');
 }
 genQuestionCard();
+// debugger;
 // Generate answer cards and push them into the answerCards array
-Question.prototype.genAnswerCards = function (){
-    for(var j = 1; j < allQuestions.length+1; j++){
-        for(var i = 1; i < 9; i++){
-            new Card(1,'img/js-a-'+j+'-'+i+'.png', 'JS');
-        }// try to do if Qindex 1 1-1.png
-    }
+// Question.prototype.genAnswerCards = function (){
+//     for(var j = 1; j < allQuestions.length; j++){
+//         for(var i = 1; i < 9; i++){
+//             new Card(j, 'img/js-a-'+j+'-'+i+'.png', 'JS');
+            
+//         }// try to do if Qindex 1 1-1.png
+//     }
         
+// }
+var genAnswerCards = function() {
+    for (var i = 1; i < allQuestions.length + 1; i++) {
+        for (var j = 1; j < 9; j++) {
+            new Card((i), 'img/js-'+i+'-'+j, 'JS');
+        }
+    }
 }
-allQuestions[0].genAnswerCards(); //testing and it work! need to make a loop or stick this somnewhere.
+genAnswerCards();  // Generates 8 answer cards per question for however many are in allQuestions array.
+
 
 function displayQuestion(){ 
-    for(var i = 1; i < allQuestions.length+1; i++){
+    // for(var i = 1; i < allQuestions.length+1; i++){
         var questEl = document.getElementById('questions-field');
         questEl.src = 'img/js-q-'+i+'.png';
-    }
 }
-displayQuestion();
+Question.prototype.displayQuestion = function() {     // Will display the question for this instance when called.
+    var questEl = document.getElementById('questions-field');
+    questEl.src = this.filePath;
+}
+
+
 
 function displayDeck(){ // displaying the deck card color accordingly to each set
     for(var i = 0; i < allQuestions.length; i++){
@@ -81,7 +97,6 @@ function shuffling( array ){
      array[count] = array[randomnumber];
      array[randomnumber] = temp
     }
-    // allCards.push(this);
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Hai's todo
@@ -104,6 +119,10 @@ function shuffling( array ){
 
 // localStorage---------------------------------------------------
 //  storage for highscores, usernames, which question the user is on, user's current score, # of incorrect answers
+// link to form for username, stingify
+var questionData = JSON.stringify(allQuestions);
+localStorage.setItem('questionData', questionData);
+
 
 // Event Listener and Click Handler-------------------------------
 //  username form, clicking on cards
