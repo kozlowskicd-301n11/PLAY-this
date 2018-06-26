@@ -12,15 +12,15 @@ function toggleSideBar(ref) {
 
 var allCards = [];
 
-var Card = function(index,filePath, language) {
-    this.index = index; // index number to track all cards
-    this.filePath = filePath;
-    this.language = language; // html, js, css
-    allCards.push(this);
-}
-////////////////////////////////////////////////
+var Card = function(index, filePath, language) {
+        this.index = index; // index number to track all cards
+        this.filePath = filePath;
+        this.language = language; // html, js, css
+        allCards.push(this);
+    }
+    ////////////////////////////////////////////////
 
-var Question = function(index, filePath, language){
+var Question = function(index, filePath, language) {
     this.index = index;
     this.filePath = filePath;
     this.language = language;
@@ -28,23 +28,24 @@ var Question = function(index, filePath, language){
 }
 Question.allQuestions = [];
 
-function genQuestionCard(){
-    new Question(1,'img/js-q-1.png', 'JS');
+function genQuestionCard() {
+    new Question(1, 'img/js-q-1.png', 'JS');
 }
 genQuestionCard();
-function genAllCard (){
+
+function genAllCard() {
     //question 1 card
-    for(var i = 0; i <7; i++){
-        new Card(1,'img/js-a-1-'+i+'.png', 'JS');
+    for (var i = 0; i < 7; i++) {
+        new Card(1, 'img/js-a-1-' + i + '.png', 'JS');
     }
-   
+
 }
 genAllCard();
 
-function displayQuestion(){
-    for(var i = 1; i < Question.allQuestions.length+1; i++){
+function displayQuestion() {
+    for (var i = 1; i < Question.allQuestions.length + 1; i++) {
         var questEl = document.getElementById('questions-field');
-        questEl.src = 'img/js-q-'+i+'.png';
+        questEl.src = 'img/js-q-' + i + '.png';
     }
 }
 displayQuestion();
@@ -54,14 +55,14 @@ displayQuestion();
 
 
 
-function displayDeck(){ // displaying the deck card color accordingly
-    for(var i = 0; i < Question.allQuestions.length; i++){
+function displayDeck() { // displaying the deck card color accordingly
+    for (var i = 0; i < Question.allQuestions.length; i++) {
         var deckcolor = document.getElementById('card-deck');
-        if (Question.allQuestions[i].language === 'HTML'){
+        if (Question.allQuestions[i].language === 'HTML') {
             deckcolor.src = "img/orangeCard.png";
-        } else if(Question.allQuestions[i].language === 'CSS'){
+        } else if (Question.allQuestions[i].language === 'CSS') {
             deckcolor.src = "img/blueCard.png";
-        }else if(Question.allQuestions[i].language === 'JS'){
+        } else if (Question.allQuestions[i].language === 'JS') {
             deckcolor.src = "img/greenCard.png";
         }
     }
@@ -71,10 +72,10 @@ displayDeck();
 // shuffle(allCards);
 // display cards
 var displayCards = function() {
-    if(Question.allQuestions[0]){
-        for(var i = 1; i < allCards.length-1; i++){
-            var cardEl = document.getElementById('card'+i);
-            cardEl.src = 'img/js-a-1-'+i+'.png';
+    if (Question.allQuestions[0]) {
+        for (var i = 1; i < allCards.length - 1; i++) {
+            var cardEl = document.getElementById('card' + i);
+            cardEl.src = 'img/js-a-1-' + i + '.png';
         }
     }
 }
@@ -143,7 +144,7 @@ var makeCssCards = function() {
 //             }
 //         }
 //     }
-    // Form Handler for username
+// Form Handler for username
 // =======
 // var displayCards = function() {
 //     {
