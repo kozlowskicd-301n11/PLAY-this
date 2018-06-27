@@ -1,6 +1,6 @@
 'use strict'
 ////////////////////////////////////////////////
-// debugger;
+debugger;
 
 var Question = function(Qindex, filePath, language){ // should add a parameter if needed
     this.Qindex = Qindex;
@@ -21,9 +21,9 @@ var Card = function(Aindex, filePath, language) {
 
 // Generating Question card
 function genQuestionCard(){
-    new Question(1,'img/js-q-1.png', 'JS');
-    new Question(2, 'img/js-q-2.png', 'JS');
-    new Question(3, 'img/js-q-3.png', 'JS');
+    new Question(1,'img/js-q-1.png', 'JS');    
+    new Question(2, 'img/js-q-2.png', 'CSS');  /////TEST QUESTION CARD
+    new Question(3, 'img/js-q-3.png', 'HTML'); /////TEST QUESTION CARD
 }
 genQuestionCard();
 // debugger;
@@ -40,43 +40,53 @@ genQuestionCard();
 var genAnswerCards = function() {
     for (var i = 1; i < allQuestions.length + 1; i++) {
         for (var j = 1; j < 9; j++) {
-            new Card((i), 'img/js-'+i+'-'+j, 'JS');
+            new Card((i), 'img/js-a-'+i+'-'+j+'.png', 'JS');
         }
     }
 }
 genAnswerCards();  // Generates 8 answer cards per question for however many are in allQuestions array.
 
 
-function displayQuestion(){ 
-    // for(var i = 1; i < allQuestions.length+1; i++){
-        var questEl = document.getElementById('questions-field');
-        questEl.src = 'img/js-q-'+i+'.png';
-}
+// function displayQuestion(){ 
+//      for(var i = 1; i < allQuestions.length+1; i++){
+//         var questEl = document.getElementById('questions-field');
+//         questEl.src = 'img/js-q-'+i+'.png';
+// }
 Question.prototype.displayQuestion = function() {     // Will display the question for this instance when called.
     var questEl = document.getElementById('questions-field');
     questEl.src = this.filePath;
 }
+allQuestions[0].displayQuestion();
 
 
+// function displayDeck(){ // displaying the deck card color accordingly to each set
+//     for(var i = 0; i < allQuestions.length; i++){
+//         var deckcolor = document.getElementById('card-deck');
+//         if (allQuestions[i].language === 'HTML'){
+//             deckcolor.src = "img/orangeCard.png";
+//         } else if(allQuestions[i].language === 'CSS'){
+//             deckcolor.src = "img/blueCard.png";
+//         }else if(allQuestions[i].language === 'JS'){
+//             deckcolor.src = "img/greenCard.png";
+//         }
+//     }
+// }
 
-function displayDeck(){ // displaying the deck card color accordingly to each set
-    for(var i = 0; i < allQuestions.length; i++){
+Question.prototype.displayDeck = function() { // displaying the deck card color accordingly to each set
         var deckcolor = document.getElementById('card-deck');
-        if (allQuestions[i].language === 'HTML'){
+        if (this.language === 'HTML'){
             deckcolor.src = "img/orangeCard.png";
-        } else if(allQuestions[i].language === 'CSS'){
+        } else if(this.language === 'CSS'){
             deckcolor.src = "img/blueCard.png";
-        }else if(allQuestions[i].language === 'JS'){
+        }else if(this.language === 'JS'){
             deckcolor.src = "img/greenCard.png";
         }
-    }
 }
-displayDeck();
 //display cards
 
 var displayCards = function() {
     if(allQuestions[0]){
-        for(var i = 0; i< allQuestions.length; i++){
+        for(var i = 0; i< 1; i++){
             shuffling(allQuestions[i].answerCards);
             for(var j = 1; j < 6; j++){
                 var cardEl = document.getElementById('card'+j);
@@ -135,7 +145,7 @@ localStorage.setItem('questionData', questionData);
 //  display username
 //  display highscores
 //  display explanation after answering question
-
+// displayDeck();
 
 
 
