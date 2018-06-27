@@ -1,6 +1,6 @@
 'use strict'
 ////////////////////////////////////////////////
-debugger;
+// debugger;
 
 var Question = function(Qindex, filePath, language){ // should add a parameter if needed
     this.Qindex = Qindex;
@@ -10,92 +10,122 @@ var Question = function(Qindex, filePath, language){ // should add a parameter i
     allQuestions.push(this);
 }
 // Question.answerCards = [];
+////////////////////////////////////////////////////////////////////
 var allQuestions = [];
 // Generate card into Question.answerCards []
 var Card = function(Aindex, filePath, language) {
     this.Aindex = Aindex; // index number to track all cards
     this.filePath = filePath;
     this.language = language; // html, js, css
-    allQuestions[this.Aindex - 1].answerCards.push(this); // Testing for the first value of array [0] will end up put in a loop or so to push all
+    allQuestions[this.Aindex-1].answerCards.push(this); // Testing for the first value of array [0] will end up put in a loop or so to push all
 }
 
 // Generating Question card
 function genQuestionCard(){
-    new Question(1,'img/js-q-1.png', 'JS');    
-    new Question(2, 'img/js-q-2.png', 'CSS');  /////TEST QUESTION CARD
-    new Question(3, 'img/js-q-3.png', 'HTML'); /////TEST QUESTION CARD
+    new Question(1,'img/q-1.png', 'HTML');
+    new Question(2,'img/q-2.png', 'CSS');
+    new Question(3,'img/q-3.png', 'JS');
+    new Question(4,'img/q-4.png', 'HTML');
+    new Question(5,'img/q-5.png', 'CSS');
+    new Question(6,'img/q-6.png', 'JS');
+    new Question(7,'img/q-7.png', 'HTML');
+    new Question(8,'img/q-8.png', 'CSS');
+    new Question(9,'img/q-9.png', 'JS');
+    new Question(10,'img/q-10.png', 'HTML');
+    new Question(11,'img/q-11.png', 'CSS');
+    new Question(12,'img/q-12.png', 'JS');
+    new Question(13,'img/q-13.png', 'HTML');
+    new Question(14,'img/q-14.png', 'CSS');
+    new Question(15,'img/q-15.png', 'JS');
+
+
 }
-genQuestionCard();
+// genQuestionCard();
 // debugger;
 // Generate answer cards and push them into the answerCards array
-// Question.prototype.genAnswerCards = function (){
-//     for(var j = 1; j < allQuestions.length; j++){
-//         for(var i = 1; i < 9; i++){
-//             new Card(j, 'img/js-a-'+j+'-'+i+'.png', 'JS');
-            
-//         }// try to do if Qindex 1 1-1.png
-//     }
-        
-// }
-var genAnswerCards = function() {
-    for (var i = 1; i < allQuestions.length + 1; i++) {
-        for (var j = 1; j < 9; j++) {
-            new Card((i), 'img/js-a-'+i+'-'+j+'.png', 'JS');
+var genAnswerCards = function(){
+    for(var i =1; i < allQuestions.length +1; i++){
+        for(var j =1; j<9 ; j++){
+            new Card(i, 'img/a-'+i+'-'+j+'.png', 'JS');
         }
     }
 }
-genAnswerCards();  // Generates 8 answer cards per question for however many are in allQuestions array.
+// genAnswerCards(); //testing and it work! need to make a loop or stick this somnewhere.
 
-
-// function displayQuestion(){ 
-//      for(var i = 1; i < allQuestions.length+1; i++){
-//         var questEl = document.getElementById('questions-field');
-//         questEl.src = 'img/js-q-'+i+'.png';
-// }
-Question.prototype.displayQuestion = function() {     // Will display the question for this instance when called.
+Question.prototype.displayQuestion = function(){
     var questEl = document.getElementById('questions-field');
-    questEl.src = this.filePath;
+    questEl.src = this.filePath
 }
-allQuestions[0].displayQuestion();
+// allQuestions[0].displayQuestion();
 
-
-// function displayDeck(){ // displaying the deck card color accordingly to each set
-//     for(var i = 0; i < allQuestions.length; i++){
-//         var deckcolor = document.getElementById('card-deck');
-//         if (allQuestions[i].language === 'HTML'){
-//             deckcolor.src = "img/orangeCard.png";
-//         } else if(allQuestions[i].language === 'CSS'){
-//             deckcolor.src = "img/blueCard.png";
-//         }else if(allQuestions[i].language === 'JS'){
-//             deckcolor.src = "img/greenCard.png";
-//         }
+// Question.prototype.displayDeck = function (){// displaying the deck card color accordingly to each question
+//     var deckcolor = document.getElementById('card-deck');
+//     if(this.language === 'HTMl'){
+//         deckcolor.src= 'img/orangeCard.png'
+//     }else if( this.language === 'CSS'){
+//         deckcolor.src = 'img/blueCard.png'
+//     }else if(this.language === 'JS'){
+//         deckcolor.src = 'img/greenCard.png'
 //     }
 // }
 
-Question.prototype.displayDeck = function() { // displaying the deck card color accordingly to each set
+function displayDeck(){ // displaying the deck card color accordingly
+    for(var i = 0; i < allQuestions.length; i++){
         var deckcolor = document.getElementById('card-deck');
-        if (this.language === 'HTML'){
+        if (allQuestions[i].language === 'HTML'){
             deckcolor.src = "img/orangeCard.png";
-        } else if(this.language === 'CSS'){
+        } else if(allQuestions[i].language === 'CSS'){
             deckcolor.src = "img/blueCard.png";
-        }else if(this.language === 'JS'){
+        }else if(allQuestions[i].language === 'JS'){
             deckcolor.src = "img/greenCard.png";
         }
-}
-//display cards
-
-var displayCards = function() {
-    if(allQuestions[0]){
-        for(var i = 0; i< 1; i++){
-            shuffling(allQuestions[i].answerCards);
-            for(var j = 1; j < 6; j++){
-                var cardEl = document.getElementById('card'+j);
-                cardEl.src = allQuestions[i].answerCards[j-1].filePath;
-            }
-        }
+        return;
     }
 }
-displayCards();
+// allQuestions[0].displayDeck();
+
+//display cards
+// debugger
+// var displayCards = function() {
+//     for(var k = 0; k < allQuestions.length; k++){
+//         while(allQuestions[k]){
+//             // for(var i = 0; i< 15; i++){
+//             shuffling(allQuestions[k].answerCards);
+//             if(allQuestions[k].answerCards.findIndex(i => i.filePath === 'img/a-'+(k+1)+'-1.png') > 4){//look here
+//                 shuffling(allQuestions[k].answerCards);
+//                 for(var j = 1; j < 6; j++){
+//                     var cardEl = document.getElementById('card'+j);
+//                     cardEl.src = allQuestions[k].answerCards[j-1].filePath;
+//                 }
+//             }
+//             for(var j = 1; j < 6; j++){
+//                 var cardEl = document.getElementById('card'+j);
+//                 cardEl.src = allQuestions[k].answerCards[j-1].filePath;
+//             }
+//             // }
+//         }   
+//     }
+// }
+// displayCards();
+
+var displayCards = function(){
+    for(var k = 1; k < allQuestions.length+1; k++){
+        shuffling(allQuestions[k-1].answerCards);
+        for(var j = 1; j < 6; j++){
+            var cardEl = document.getElementById('card'+j);
+            cardEl.src = allQuestions[k-1].answerCards[j-1].filePath;
+        }
+        while(allQuestions[k-1].answerCards.findIndex(i => i.filePath === 'img/a-'+k+'-1.png') > 4){
+            shuffling(allQuestions[k-1].answerCards);
+            for(var j = 1; j < 6; j++){
+                var cardEl = document.getElementById('card'+j);
+                cardEl.src = allQuestions[k-1].answerCards[j-1].filePath;
+            }
+        }
+        return(console.log(allQuestions[k-1].answerCards.findIndex(i => i.filePath === 'img/a-'+k+'-1.png')));
+    }  
+}
+
 
 function shuffling( array ){
     var count = array.length,
@@ -110,10 +140,7 @@ function shuffling( array ){
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Hai's todo
-    //protyope shuffle check for first 5 splice ???
-    //set correct answer func 
-//while not in first 5 call shuffle???
-// make sure the correct answer is displayed EVERYTIME.
+    //set correct answer func ???
 // if answer not correct do the animation buzzz if correct rotate the cards up.!!!!!!
 // animation card sending out
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -145,53 +172,100 @@ localStorage.setItem('questionData', questionData);
 //  display username
 //  display highscores
 //  display explanation after answering question
-// displayDeck();
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////
 // Animation moves card to the other deck
-function cardmove (card, x, y){
-    var cardEl = document.getElementById(card);
-    cardEl.style.transform = 'perspective( 1000px ) rotateY( 0deg )'
-    cardEl.style.transform = 'translate('+x+', '+y+') rotate(720deg)';
-    if(card === 'card1'){
-        cardEl.setAttribute('onclick',"moveBack('card1')");
-    }else if(card === 'card2'){
-        cardEl.setAttribute('onclick',"moveBack('card2')");
-    }else if(card === 'card3'){
-        cardEl.setAttribute('onclick',"moveBack('card3')");
-    }else if(card === 'card4'){
-        cardEl.setAttribute('onclick',"moveBack('card4')");
-    }else if(card === 'card5'){
-        cardEl.setAttribute('onclick',"moveBack('card5')");
-    }
-}
-// find a way to move card back if its not the right answer. 
-// function moveBack(card){
-//     var cardUl = document.getElementById(card)
-//     cardUl.style.transform = 'perspective( 1000px ) rotateY( 0deg )'
-//     cardUl.style.transform = 'translate(0px, 0px;) rotate(-1440deg)';
-// }
-
-// function answerCheck(){
-//     while(Question.allQuestions[0] && allCards[2]){
-//         cardmove(card, x, y)
-//     }
-// }????????????
-/////////////////////////////////////////////////
 
 //======== Nav-Bar JS =======//
 
 function toggleSideBar(ref) {
     ref.classList.toggle('active');
     document.getElementById('sidebar').classList.toggle('active');
-
+    
 };
 
 //======== End Nav Bar JS =====//
+                                
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function cardmove (card, x, y){
+    var cardEl = document.getElementById(card);
+    cardEl.style.transition = 'transform 0.5s ease-in-out 0.1s';
+    cardEl.style.transform = 'perspective( 1000px ) rotateY( 0deg )';
+    cardEl.style.transform = 'translate('+x+', '+y+') rotate(720deg)';
+
+}
+
+/////////////////////////////////////////////////
+// var correctCardPosition = allQuestions[0].answerCards.findIndex(i => i.filePath === 'img/a-1-1.png');
+
+// function checkAnswer(card){
+//     var cardEl = document.getElementById(card);
+
+//     for (var i = 1; i < 6; i++ ){
+//         // var cardEl = document.getElementById('card'+i);
+//         // var correctCardPosition = allQuestions[i-1].answerCards.findIndex(x => x.filePath === 'img/a-'+i+'-1.png');
+//         if(correctCardPosition == i-1 && cardEl.id === 'card'+i){
+//             if(cardEl.id === 'card1'){
+//                 cardmove(card, '773px', '-324px');
+//             }else if(cardEl.id === 'card2'){
+//                 cardmove(card, '576px', '-324px');
+//             }else if(cardEl.id === 'card3'){
+//                 cardmove(card, '382px', '-324px');
+//             }else if(cardEl.id === 'card4'){
+//                 cardmove(card, '188px', '-324px');
+//             }else if(cardEl.id === 'card5'){
+//                 cardmove(card, '-9px', '-324px');
+//             }
+//         } else if(correctCardPosition == i-1 && cardEl.id !== 'card'+i){
+//             shake(card);
+//         }
+//     }
+
+// }
+function checkAnswer(card){
+    var cardEl = document.getElementById(card);
+    for(var k = 0; k < allQuestions.length; k++){
+        for(var j = 1; j < 9; j++){
+            var correctCardPosition = allQuestions[k].answerCards.findIndex(x => x.filePath === 'img/a-'+j+'-1.png');
+            for (var i = 1; i < 6; i++ ){
+                // var cardEl = document.getElementById('card'+i);
+                if(correctCardPosition == i-1 && cardEl.id === 'card'+i){
+                    if(cardEl.id === 'card1'){
+                        cardmove(card, '736px', '-322px');
+                    }else if(cardEl.id === 'card2'){
+                        cardmove(card, '539px', '-322px');
+                    }else if(cardEl.id === 'card3'){
+                        cardmove(card, '345px', '-322px');
+                    }else if(cardEl.id === 'card4'){
+                        cardmove(card, '151px', '-322px');
+                    }else if(cardEl.id === 'card5'){
+                        cardmove(card, '-46px', '-322px');
+                    }
+                } else if(correctCardPosition == i-1 && cardEl.id !== 'card'+i){
+                    shake(card);
+                }
+
+        }
+    }return;
+    }
+
+}
+
+function shake(card){
+    for (var i = 1; i < 6; i++ ){
+        var cardEl = document.getElementById(card);
+        cardEl.style.animation = 'shake 0.5s';
+        cardEl.style.animationIterationCount = '2s';
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// need make button, event listener, event handler
+function renderAll(){
+    genQuestionCard();
+    genAnswerCards();
+    allQuestions[0].displayQuestion();
+    displayCards();
+    // for(var i = 0; i < 15; i++){
+    displayDeck();
+    // }
+}
+renderAll();
