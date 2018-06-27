@@ -1,5 +1,14 @@
-/*======Nav-Bar for Play.this======*/
+/*======= Banner =======*/
 
+.center {
+    display: block;
+    max-width: 300px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+
+/*======Nav-Bar for Play.this======*/
 
 a {
     color: aliceblue;
@@ -11,28 +20,27 @@ nav ul {
     padding: 0px;
     box-sizing: border-box;
     font-family: "Monaco", sans-serif;
-    list-style-type: none;
 }
 
 #sidebar ul li {
     color: #ccc;
     font-size: 20px;
-    width: 100%;
     height: 50px;
+    width: 100%;
     border-bottom: 1px solid #3e3e3e;
     line-height: 50px;
 }
 
 body {
-    background-color: #2c2a2a;
+    background: repeating-linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
 }
 
 #sidebar {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 200px;
-    height: 205px;
+    height: 220px;
+    width: 190px;
     background: #1a1a1a;
     text-align: center;
     transform-origin: left;
@@ -45,7 +53,6 @@ body {
     left: 30px;
     top: 20px;
     transition: left 200ms linear 0ms, transform 300ms ease 100ms;
-
 }
 
 #toggle-btn.active {
@@ -57,13 +64,12 @@ body {
     position: relative;
     top: 0px;
     display: block;
-
     background: #8e8b8b;
-    width: 30px;
     height: 5px;
+    width: 30px;
     margin: 5px 0px;
     cursor: pointer;
-    transition: transform 300ms ease 200ms;
+    transition: tr  ansform 300ms ease 200ms;
 }
 
 #toggle-btn.active span:nth-child(1) {
@@ -84,6 +90,7 @@ body {
     transform: perspective(200px) rotateY(0deg);
 }
 
+
 /*==========End Nav Bar======*/
 
 
@@ -92,7 +99,7 @@ body {
 header ul {
     width: 960px;
     margin: 0px auto;
-    margin-top: 80px;
+    margin-top: 10px;
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -123,14 +130,12 @@ main ul li:first-child {
 main ul li:last-child {
     margin: 0px 0px 0px 10px
 }
-
-#card1, #card2, #card3, #card4, #card5 {
-    background-color: #2c2a2a;
+main ul li{ 
+    display: inline-block;
     height: 270px;
-    width: 176px;
-    /* transform: translate(0px, 0px) rotate(360deg); */
-    transition: transform .5s ease-in-out 0.1s;
+    /* background-color: red; */
 }
+/*  */
 
 #card-deck {
     border: 1px black solid;
@@ -151,5 +156,38 @@ main ul li:last-child {
     height: 270px;
     width: 174px;
 }
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+  #card1, #card2, #card3, #card4, #card5{
+    /* background-color: red; */
+    height: 270px;
+    width: 176px;
+    /* transform: translate(0px, 0px) rotate(360deg); */
+    /* transition: transform 0.5s ease-in-out 0.1s; */
+  }
 
-/*============End Game Screen Layout=========*/
+@keyframes fade-in-right {
+from {
+    opacity: 0;
+    transform: translateX(-15px);
+}
+to {
+    opacity: 1;
+    transform: translateX(0);
+}
+}
+/* background */
+body {
+    background: repeating-linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
+}
