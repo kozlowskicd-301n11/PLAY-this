@@ -10,61 +10,71 @@ var Question = function(Qindex, filePath, language){ // should add a parameter i
     allQuestions.push(this);
 }
 // Question.answerCards = [];
+////////////////////////////////////////////////////////////////////
 var allQuestions = [];
 // Generate card into Question.answerCards []
 var Card = function(Aindex, filePath, language) {
     this.Aindex = Aindex; // index number to track all cards
     this.filePath = filePath;
     this.language = language; // html, js, css
-    allQuestions[0].answerCards.push(this); // Testing for the first value of array [0] will end up put in a loop or so to push all
+    allQuestions[this.Aindex-1].answerCards.push(this); // Testing for the first value of array [0] will end up put in a loop or so to push all
 }
 
 // Generating Question card
 function genQuestionCard(){
     new Question(1,'img/js-q-1.png', 'JS');
+
 }
 genQuestionCard();
 // Generate answer cards and push them into the answerCards array
-Question.prototype.genAnswerCards = function (){
-    for(var j = 1; j < allQuestions.length+1; j++){
-        for(var i = 1; i < 9; i++){
-            new Card(1,'img/js-a-'+j+'-'+i+'.png', 'JS');
-        }// try to do if Qindex 1 1-1.png
-    }
-        
-}
-allQuestions[0].genAnswerCards(); //testing and it work! need to make a loop or stick this somnewhere.
-
-function displayQuestion(){ 
-    for(var i = 1; i < allQuestions.length+1; i++){
-        var questEl = document.getElementById('questions-field');
-        questEl.src = 'img/js-q-'+i+'.png';
-    }
-}
-displayQuestion();
-
-function displayDeck(){ // displaying the deck card color accordingly to each set
-    for(var i = 0; i < allQuestions.length; i++){
-        var deckcolor = document.getElementById('card-deck');
-        if (allQuestions[i].language === 'HTML'){
-            deckcolor.src = "img/orangeCard.png";
-        } else if(allQuestions[i].language === 'CSS'){
-            deckcolor.src = "img/blueCard.png";
-        }else if(allQuestions[i].language === 'JS'){
-            deckcolor.src = "img/greenCard.png";
+var genAnswerCards = function(){
+    for(var i =1; i < allQuestions.length +1; i++){
+        for(var j =1; j<9 ; j++){
+            new Card(i, 'img/js-a-'+i+'-'+j+'.png', 'JS');
         }
     }
 }
-displayDeck();
-//display cards
+genAnswerCards(); //testing and it work! need to make a loop or stick this somnewhere.
 
+Question.prototype.displayQuestion = function(){
+    var questEl = document.getElementById('questions-field');
+    questEl.src = this.filePath
+}
+allQuestions[0].displayQuestion();
+
+Question.prototype.displayDeck = function (){// displaying the deck card color accordingly to each question
+    var deckcolor = document.getElementById('card-deck');
+    if(this.language === 'HTMl'){
+        deckcolor.src= 'img/orangeCard.png'
+    }else if( this.language === 'CSS'){
+        deckcolor.src = 'img/blueCard.png'
+    }else if(this.language === 'JS'){
+        deckcolor.src = 'img/greenCard.png'
+    }
+}
+allQuestions[0].displayDeck();
+
+//display cards
 var displayCards = function() {
     if(allQuestions[0]){
         for(var i = 0; i< allQuestions.length; i++){
             shuffling(allQuestions[i].answerCards);
+            while(allQuestions[i].answerCards.findIndex(i => i.filePath === 'img/js-a-1-1.png') > 4){//look here
+                shuffling(allQuestions[i].answerCards);
+                for(var j = 1; j < 6; j++){
+                    var cardEl = document.getElementById('card'+j);
+                    cardEl.src = allQuestions[i].answerCards[j-1].filePath;
+                    // cardEl.style.backgroundImage = "url('img/greenCard.png')";
+                    // cardEl.style.opacity = 0;
+                    // cardEl.style.animation = 'fade-in-right ease 1s forwards'
+                }
+            }
             for(var j = 1; j < 6; j++){
                 var cardEl = document.getElementById('card'+j);
                 cardEl.src = allQuestions[i].answerCards[j-1].filePath;
+                // cardEl.style.backgroundImage = "url('img/greenCard.png')";
+                // cardEl.style.opacity = 0;
+                // cardEl.style.animation = 'fade-in-right ease 1s forwards'
             }
         }
     }
@@ -81,14 +91,10 @@ function shuffling( array ){
      array[count] = array[randomnumber];
      array[randomnumber] = temp
     }
-    // allCards.push(this);
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Hai's todo
-    //protyope shuffle check for first 5 splice ???
-    //set correct answer func 
-//while not in first 5 call shuffle???
-// make sure the correct answer is displayed EVERYTIME.
+    //set correct answer func ???
 // if answer not correct do the animation buzzz if correct rotate the cards up.!!!!!!
 // animation card sending out
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -116,53 +122,65 @@ function shuffling( array ){
 //  display username
 //  display highscores
 //  display explanation after answering question
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////
 // Animation moves card to the other deck
-function cardmove (card, x, y){
-    var cardEl = document.getElementById(card);
-    cardEl.style.transform = 'perspective( 1000px ) rotateY( 0deg )'
-    cardEl.style.transform = 'translate('+x+', '+y+') rotate(720deg)';
-    if(card === 'card1'){
-        cardEl.setAttribute('onclick',"moveBack('card1')");
-    }else if(card === 'card2'){
-        cardEl.setAttribute('onclick',"moveBack('card2')");
-    }else if(card === 'card3'){
-        cardEl.setAttribute('onclick',"moveBack('card3')");
-    }else if(card === 'card4'){
-        cardEl.setAttribute('onclick',"moveBack('card4')");
-    }else if(card === 'card5'){
-        cardEl.setAttribute('onclick',"moveBack('card5')");
-    }
-}
-// find a way to move card back if its not the right answer. 
-// function moveBack(card){
-//     var cardUl = document.getElementById(card)
-//     cardUl.style.transform = 'perspective( 1000px ) rotateY( 0deg )'
-//     cardUl.style.transform = 'translate(0px, 0px;) rotate(-1440deg)';
-// }
-
-// function answerCheck(){
-//     while(Question.allQuestions[0] && allCards[2]){
-//         cardmove(card, x, y)
-//     }
-// }????????????
-/////////////////////////////////////////////////
 
 //======== Nav-Bar JS =======//
 
 function toggleSideBar(ref) {
     ref.classList.toggle('active');
     document.getElementById('sidebar').classList.toggle('active');
-
+    
 };
 
 //======== End Nav Bar JS =====//
+                                
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function cardmove (card, x, y){
+    var cardEl = document.getElementById(card);
+    cardEl.style.transition = 'transform 0.5s ease-in-out 0.1s';
+    cardEl.style.transform = 'perspective( 1000px ) rotateY( 0deg )';
+    cardEl.style.transform = 'translate('+x+', '+y+') rotate(720deg)';
+
+}
+
+/////////////////////////////////////////////////
+var correctCardPosition = allQuestions[0].answerCards.findIndex(i => i.filePath === 'img/js-a-1-1.png');
+
+function checkAnswer(card){
+    var cardEl = document.getElementById(card);
+
+    for (var i = 1; i < 6; i++ ){
+        // var cardEl = document.getElementById('card'+i);
+        if(correctCardPosition === i-1 && cardEl.id === 'card'+i){
+            if(cardEl.id === 'card1'){
+                cardmove(card, '773px', '-324px');
+            }else if(cardEl.id === 'card2'){
+                cardmove(card, '576px', '-324px');
+            }else if(cardEl.id === 'card3'){
+                cardmove(card, '382px', '-324px');
+            }else if(cardEl.id === 'card4'){
+                cardmove(card, '188px', '-324px');
+            }else if(cardEl.id === 'card5'){
+                cardmove(card, '-9px', '-324px');
+            }
+        } else if(correctCardPosition === i-1 && cardEl.id !== 'card'+i){
+            shake(card);
+        }
+    }
+
+}
+
+function shake(card){
+    for (var i = 1; i < 6; i++ ){
+        var cardEl = document.getElementById(card);
+        cardEl.style.animation = 'shake 0.5s';
+        cardEl.style.animationIterationCount = '2s';
+    }
+}
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
