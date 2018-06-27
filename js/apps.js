@@ -22,64 +22,110 @@ var Card = function(Aindex, filePath, language) {
 
 // Generating Question card
 function genQuestionCard(){
-    new Question(1,'img/js-q-1.png', 'JS');
+    new Question(1,'img/q-1.png', 'HTML');
+    new Question(2,'img/q-2.png', 'CSS');
+    new Question(3,'img/q-3.png', 'JS');
+    new Question(4,'img/q-4.png', 'HTML');
+    new Question(5,'img/q-5.png', 'CSS');
+    new Question(6,'img/q-6.png', 'JS');
+    new Question(7,'img/q-7.png', 'HTML');
+    new Question(8,'img/q-8.png', 'CSS');
+    new Question(9,'img/q-9.png', 'JS');
+    new Question(10,'img/q-10.png', 'HTML');
+    new Question(11,'img/q-11.png', 'CSS');
+    new Question(12,'img/q-12.png', 'JS');
+    new Question(13,'img/q-13.png', 'HTML');
+    new Question(14,'img/q-14.png', 'CSS');
+    new Question(15,'img/q-15.png', 'JS');
+
 
 }
-genQuestionCard();
+// genQuestionCard();
+// debugger;
 // Generate answer cards and push them into the answerCards array
 var genAnswerCards = function(){
     for(var i =1; i < allQuestions.length +1; i++){
         for(var j =1; j<9 ; j++){
-            new Card(i, 'img/js-a-'+i+'-'+j+'.png', 'JS');
+            new Card(i, 'img/a-'+i+'-'+j+'.png', 'JS');
         }
     }
 }
-genAnswerCards(); //testing and it work! need to make a loop or stick this somnewhere.
+// genAnswerCards(); //testing and it work! need to make a loop or stick this somnewhere.
 
 Question.prototype.displayQuestion = function(){
     var questEl = document.getElementById('questions-field');
     questEl.src = this.filePath
 }
-allQuestions[0].displayQuestion();
+// allQuestions[0].displayQuestion();
 
-Question.prototype.displayDeck = function (){// displaying the deck card color accordingly to each question
-    var deckcolor = document.getElementById('card-deck');
-    if(this.language === 'HTMl'){
-        deckcolor.src= 'img/orangeCard.png'
-    }else if( this.language === 'CSS'){
-        deckcolor.src = 'img/blueCard.png'
-    }else if(this.language === 'JS'){
-        deckcolor.src = 'img/greenCard.png'
+// Question.prototype.displayDeck = function (){// displaying the deck card color accordingly to each question
+//     var deckcolor = document.getElementById('card-deck');
+//     if(this.language === 'HTMl'){
+//         deckcolor.src= 'img/orangeCard.png'
+//     }else if( this.language === 'CSS'){
+//         deckcolor.src = 'img/blueCard.png'
+//     }else if(this.language === 'JS'){
+//         deckcolor.src = 'img/greenCard.png'
+//     }
+// }
+
+function displayDeck(){ // displaying the deck card color accordingly
+    for(var i = 0; i < allQuestions.length; i++){
+        var deckcolor = document.getElementById('card-deck');
+        if (allQuestions[i].language === 'HTML'){
+            deckcolor.src = "img/orangeCard.png";
+        } else if(allQuestions[i].language === 'CSS'){
+            deckcolor.src = "img/blueCard.png";
+        }else if(allQuestions[i].language === 'JS'){
+            deckcolor.src = "img/greenCard.png";
+        }
+        return;
     }
 }
-allQuestions[0].displayDeck();
+// allQuestions[0].displayDeck();
 
 //display cards
-var displayCards = function() {
-    if(allQuestions[0]){
-        for(var i = 0; i< allQuestions.length; i++){
-            shuffling(allQuestions[i].answerCards);
-            while(allQuestions[i].answerCards.findIndex(i => i.filePath === 'img/js-a-1-1.png') > 4){//look here
-                shuffling(allQuestions[i].answerCards);
-                for(var j = 1; j < 6; j++){
-                    var cardEl = document.getElementById('card'+j);
-                    cardEl.src = allQuestions[i].answerCards[j-1].filePath;
-                    // cardEl.style.backgroundImage = "url('img/greenCard.png')";
-                    // cardEl.style.opacity = 0;
-                    // cardEl.style.animation = 'fade-in-right ease 1s forwards'
-                }
-            }
+// debugger
+// var displayCards = function() {
+//     for(var k = 0; k < allQuestions.length; k++){
+//         while(allQuestions[k]){
+//             // for(var i = 0; i< 15; i++){
+//             shuffling(allQuestions[k].answerCards);
+//             if(allQuestions[k].answerCards.findIndex(i => i.filePath === 'img/a-'+(k+1)+'-1.png') > 4){//look here
+//                 shuffling(allQuestions[k].answerCards);
+//                 for(var j = 1; j < 6; j++){
+//                     var cardEl = document.getElementById('card'+j);
+//                     cardEl.src = allQuestions[k].answerCards[j-1].filePath;
+//                 }
+//             }
+//             for(var j = 1; j < 6; j++){
+//                 var cardEl = document.getElementById('card'+j);
+//                 cardEl.src = allQuestions[k].answerCards[j-1].filePath;
+//             }
+//             // }
+//         }   
+//     }
+// }
+// displayCards();
+
+var displayCards = function(){
+    for(var k = 1; k < allQuestions.length+1; k++){
+        shuffling(allQuestions[k-1].answerCards);
+        for(var j = 1; j < 6; j++){
+            var cardEl = document.getElementById('card'+j);
+            cardEl.src = allQuestions[k-1].answerCards[j-1].filePath;
+        }
+        while(allQuestions[k-1].answerCards.findIndex(i => i.filePath === 'img/a-'+k+'-1.png') > 4){
+            shuffling(allQuestions[k-1].answerCards);
             for(var j = 1; j < 6; j++){
                 var cardEl = document.getElementById('card'+j);
-                cardEl.src = allQuestions[i].answerCards[j-1].filePath;
-                // cardEl.style.backgroundImage = "url('img/greenCard.png')";
-                // cardEl.style.opacity = 0;
-                // cardEl.style.animation = 'fade-in-right ease 1s forwards'
+                cardEl.src = allQuestions[k-1].answerCards[j-1].filePath;
             }
         }
-    }
+        return(console.log(allQuestions[k-1].answerCards.findIndex(i => i.filePath === 'img/a-'+k+'-1.png')));
+    }  
 }
-displayCards();
+
 
 function shuffling( array ){
     var count = array.length,
@@ -110,6 +156,10 @@ function shuffling( array ){
 
 // localStorage---------------------------------------------------
 //  storage for highscores, usernames, which question the user is on, user's current score, # of incorrect answers
+// link to form for username, stingify
+var questionData = JSON.stringify(allQuestions);
+localStorage.setItem('questionData', questionData);
+
 
 // Event Listener and Click Handler-------------------------------
 //  username form, clicking on cards
@@ -144,28 +194,57 @@ function cardmove (card, x, y){
 }
 
 /////////////////////////////////////////////////
-var correctCardPosition = allQuestions[0].answerCards.findIndex(i => i.filePath === 'img/js-a-1-1.png');
+// var correctCardPosition = allQuestions[0].answerCards.findIndex(i => i.filePath === 'img/a-1-1.png');
 
+// function checkAnswer(card){
+//     var cardEl = document.getElementById(card);
+
+//     for (var i = 1; i < 6; i++ ){
+//         // var cardEl = document.getElementById('card'+i);
+//         // var correctCardPosition = allQuestions[i-1].answerCards.findIndex(x => x.filePath === 'img/a-'+i+'-1.png');
+//         if(correctCardPosition == i-1 && cardEl.id === 'card'+i){
+//             if(cardEl.id === 'card1'){
+//                 cardmove(card, '773px', '-324px');
+//             }else if(cardEl.id === 'card2'){
+//                 cardmove(card, '576px', '-324px');
+//             }else if(cardEl.id === 'card3'){
+//                 cardmove(card, '382px', '-324px');
+//             }else if(cardEl.id === 'card4'){
+//                 cardmove(card, '188px', '-324px');
+//             }else if(cardEl.id === 'card5'){
+//                 cardmove(card, '-9px', '-324px');
+//             }
+//         } else if(correctCardPosition == i-1 && cardEl.id !== 'card'+i){
+//             shake(card);
+//         }
+//     }
+
+// }
 function checkAnswer(card){
     var cardEl = document.getElementById(card);
+    for(var k = 0; k < allQuestions.length; k++){
+        for(var j = 1; j < 9; j++){
+            var correctCardPosition = allQuestions[k].answerCards.findIndex(x => x.filePath === 'img/a-'+j+'-1.png');
+            for (var i = 1; i < 6; i++ ){
+                // var cardEl = document.getElementById('card'+i);
+                if(correctCardPosition == i-1 && cardEl.id === 'card'+i){
+                    if(cardEl.id === 'card1'){
+                        cardmove(card, '736px', '-322px');
+                    }else if(cardEl.id === 'card2'){
+                        cardmove(card, '539px', '-322px');
+                    }else if(cardEl.id === 'card3'){
+                        cardmove(card, '345px', '-322px');
+                    }else if(cardEl.id === 'card4'){
+                        cardmove(card, '151px', '-322px');
+                    }else if(cardEl.id === 'card5'){
+                        cardmove(card, '-46px', '-322px');
+                    }
+                } else if(correctCardPosition == i-1 && cardEl.id !== 'card'+i){
+                    shake(card);
+                }
 
-    for (var i = 1; i < 6; i++ ){
-        // var cardEl = document.getElementById('card'+i);
-        if(correctCardPosition === i-1 && cardEl.id === 'card'+i){
-            if(cardEl.id === 'card1'){
-                cardmove(card, '773px', '-324px');
-            }else if(cardEl.id === 'card2'){
-                cardmove(card, '576px', '-324px');
-            }else if(cardEl.id === 'card3'){
-                cardmove(card, '382px', '-324px');
-            }else if(cardEl.id === 'card4'){
-                cardmove(card, '188px', '-324px');
-            }else if(cardEl.id === 'card5'){
-                cardmove(card, '-9px', '-324px');
-            }
-        } else if(correctCardPosition === i-1 && cardEl.id !== 'card'+i){
-            shake(card);
         }
+    }return;
     }
 
 }
@@ -178,9 +257,15 @@ function shake(card){
     }
 }
 
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////
+// need make button, event listener, event handler
+function renderAll(){
+    genQuestionCard();
+    genAnswerCards();
+    allQuestions[0].displayQuestion();
+    displayCards();
+    // for(var i = 0; i < 15; i++){
+    displayDeck();
+    // }
+}
+renderAll();

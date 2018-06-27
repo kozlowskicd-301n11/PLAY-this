@@ -1,4 +1,19 @@
+/*======= Banner =======*/
+
+.center {
+    display: block;
+    max-width: 300px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+
 /*======Nav-Bar for Play.this======*/
+
+a {
+    color: aliceblue;
+    text-decoration: none;
+}
 
 nav ul {
     margin: 0px;
@@ -10,22 +25,22 @@ nav ul {
 #sidebar ul li {
     color: #ccc;
     font-size: 20px;
-    width: 100%;
     height: 50px;
-    border-bottom: 1px solid #222222;
+    width: 100%;
+    border-bottom: 1px solid #3e3e3e;
     line-height: 50px;
 }
 
 body {
-    /* overflow: hidden; */
+    background: repeating-linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
 }
 
 #sidebar {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 200px;
-    height: 230px;
+    height: 220px;
+    width: 190px;
     background: #1a1a1a;
     text-align: center;
     transform-origin: left;
@@ -41,7 +56,7 @@ body {
 }
 
 #toggle-btn.active {
-    left: 230px;
+    left: 200px;
     transform: rotate(360deg);
 }
 
@@ -49,12 +64,12 @@ body {
     position: relative;
     top: 0px;
     display: block;
-    background: #1a1a1a;
-    width: 30px;
+    background: #8e8b8b;
     height: 5px;
+    width: 30px;
     margin: 5px 0px;
     cursor: pointer;
-    transition: transform 300ms ease 200ms;
+    transition: tr  ansform 300ms ease 200ms;
 }
 
 #toggle-btn.active span:nth-child(1) {
@@ -78,26 +93,21 @@ body {
 
 /*==========End Nav Bar======*/
 
+
+/*==========Game Screen Layout==========*/
+
 header ul {
     width: 960px;
     margin: 0px auto;
-    margin-top: 80px;
+    margin-top: 10px;
     padding-left: 10%;
     padding-right: 10%;
 }
+
 header ul li {
     display: inline-block;
 }
-#card-deck {
-    margin-right: 10px;
-}
-#questions-field {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-#card-choice {
-    margin-left: 10px;
-}
+
 main ul {
     width: 960px;
     margin: 40px auto 0px auto;
@@ -105,13 +115,18 @@ main ul {
     padding-right: 10%;
     list-style-type: none;
 }
+
 main ul li {
     display: inline-block;
     margin: 0px 7px;
+    height: 270px;
+    background-color: #585555
 }
+
 main ul li:first-child {
     margin: 0px 10px 0px 0px
 }
+
 main ul li:last-child {
     margin: 0px 0px 0px 10px
 }
@@ -122,16 +137,22 @@ main ul li{
 }
 /*  */
 
-#card-deck{
+#card-deck {
+    border: 1px black solid;
+    border-radius: 20px;
     height: 270px;
     width: 176px;
 }
-#questions-field{
+
+#questions-field {
+    border: 1px black solid;
+    border-radius: 20px;
     height: 350px;
     width: 540px;
 }
-#card-choice{
-    border: 10px groove #e3e3e3;
+
+#card-choice {
+    border: 8px groove #a59e99;
     height: 270px;
     width: 174px;
 }
