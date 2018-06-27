@@ -35,6 +35,22 @@ body {
     background: repeating-linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
 }
 
+#user-name {
+    font-size: 25px;
+    display: block;
+    max-width: 650px;
+    margin: 0 auto;
+    width: 90%;
+    color: rgba(205, 77, 77, 0.882);
+}
+
+#clear-name {
+    display: block;
+    max-width: 150px;
+    margin: 0 auto;
+    width: 90%;
+}
+
 #sidebar {
     position: absolute;
     top: 0px;
