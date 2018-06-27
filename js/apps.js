@@ -1,6 +1,6 @@
 'use strict'
 ////////////////////////////////////////////////
-debugger;
+// debugger;
 
 var Question = function(Qindex, filePath, language){ // should add a parameter if needed
     this.Qindex = Qindex;
@@ -82,6 +82,7 @@ Question.prototype.displayDeck = function() { // displaying the deck card color 
             deckcolor.src = "img/greenCard.png";
         }
 }
+allQuestions[i].displayDeck();
 //display cards
 
 var displayCards = function() {
