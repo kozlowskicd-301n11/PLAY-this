@@ -1,6 +1,17 @@
 'use strict'
 ////////////////////////////////////////////////
 // debugger;
+var allQuestions = [];
+var currentQuestion = 0;
+var getCurrentQ = localStorage.getItem('currentQuestion');
+currentQuestion = JSON.parse(getCurrentQ);
+if(!localStorage.currentQuestion){
+    var currentQuestion = 0;
+}
+
+var incorrectTally = 0;
+var getTally = localStorage.getItem('incorrectTally');
+var incorrectTally = JSON.parse(getTally);
 
 var Question = function(Qindex, filePath, language){ // should add a parameter if needed
     this.Qindex = Qindex;
@@ -11,7 +22,6 @@ var Question = function(Qindex, filePath, language){ // should add a parameter i
 }
 // Question.answerCards = [];
 ////////////////////////////////////////////////////////////////////
-var allQuestions = [];
 // Generate card into Question.answerCards []
 var Card = function(Aindex, filePath, language) {
     this.Aindex = Aindex; // index number to track all cards
@@ -50,80 +60,34 @@ var genAnswerCards = function(){
         }
     }
 }
-// genAnswerCards(); //testing and it work! need to make a loop or stick this somnewhere.
-
-Question.prototype.displayQuestion = function(){
+var displayQuestion = function(Qnum){
     var questEl = document.getElementById('questions-field');
-    questEl.src = this.filePath
+    questEl.src = "img/q-"+(Qnum+1)+".png";
 }
-// allQuestions[0].displayQuestion();
-
-// Question.prototype.displayDeck = function (){// displaying the deck card color accordingly to each question
-//     var deckcolor = document.getElementById('card-deck');
-//     if(this.language === 'HTMl'){
-//         deckcolor.src= 'img/orangeCard.png'
-//     }else if( this.language === 'CSS'){
-//         deckcolor.src = 'img/blueCard.png'
-//     }else if(this.language === 'JS'){
-//         deckcolor.src = 'img/greenCard.png'
-//     }
-// }
-
-function displayDeck(){ // displaying the deck card color accordingly
-    for(var i = 0; i < allQuestions.length; i++){
-        var deckcolor = document.getElementById('card-deck');
-        if (allQuestions[i].language === 'HTML'){
-            deckcolor.src = "img/orangeCard.png";
-        } else if(allQuestions[i].language === 'CSS'){
-            deckcolor.src = "img/blueCard.png";
-        }else if(allQuestions[i].language === 'JS'){
-            deckcolor.src = "img/greenCard.png";
-        }
-        return;
+function displayDeck (){ 
+    var deckcolor = document.getElementById('card-deck');
+    if(currentQuestion === 0 || currentQuestion === 3 || currentQuestion === 6 || currentQuestion === 9 || currentQuestion === 12){
+        deckcolor.src = "img/orangeCard.png";
+    }else if(currentQuestion === 1 || currentQuestion === 4 || currentQuestion === 7 || currentQuestion === 10 || currentQuestion === 13){
+        deckcolor.src = "img/blueCard.png";
+    }else if(currentQuestion === 2 || currentQuestion === 5 || currentQuestion === 8 || currentQuestion === 11 || currentQuestion === 14){
+        deckcolor.src = "img/greenCard.png";
     }
-}
-// allQuestions[0].displayDeck();
+};
 
-//display cards
-// debugger
-// var displayCards = function() {
-//     for(var k = 0; k < allQuestions.length; k++){
-//         while(allQuestions[k]){
-//             // for(var i = 0; i< 15; i++){
-//             shuffling(allQuestions[k].answerCards);
-//             if(allQuestions[k].answerCards.findIndex(i => i.filePath === 'img/a-'+(k+1)+'-1.png') > 4){//look here
-//                 shuffling(allQuestions[k].answerCards);
-//                 for(var j = 1; j < 6; j++){
-//                     var cardEl = document.getElementById('card'+j);
-//                     cardEl.src = allQuestions[k].answerCards[j-1].filePath;
-//                 }
-//             }
-//             for(var j = 1; j < 6; j++){
-//                 var cardEl = document.getElementById('card'+j);
-//                 cardEl.src = allQuestions[k].answerCards[j-1].filePath;
-//             }
-//             // }
-//         }   
-//     }
-// }
-// displayCards();
-
-var displayCards = function(){
-    for(var k = 1; k < allQuestions.length+1; k++){
-        shuffling(allQuestions[k-1].answerCards);
-        for(var j = 1; j < 6; j++){
-            var cardEl = document.getElementById('card'+j);
-            cardEl.src = allQuestions[k-1].answerCards[j-1].filePath;
+var displayCards = function(Qnum){ // from 0-14
+    shuffling(allQuestions[Qnum].answerCards);
+    for(var i = 1; i< 6; i++){
+        var cardEl = document.getElementById('card'+i);
+        cardEl.src = allQuestions[Qnum].answerCards[i-1].filePath;
+    }
+    while(allQuestions[Qnum].answerCards.findIndex(i => i.filePath === 'img/a-'+(Qnum+1)+'-1.png') > 4){
+        shuffling(allQuestions[Qnum].answerCards);
+        for(var i = 1; i< 6; i++){
+            var cardEl = document.getElementById('card'+i);
+            cardEl.src = allQuestions[Qnum].answerCards[i-1].filePath;
         }
-        while(allQuestions[k-1].answerCards.findIndex(i => i.filePath === 'img/a-'+k+'-1.png') > 4){
-            shuffling(allQuestions[k-1].answerCards);
-            for(var j = 1; j < 6; j++){
-                var cardEl = document.getElementById('card'+j);
-                cardEl.src = allQuestions[k-1].answerCards[j-1].filePath;
-            }
-        }
-        return(console.log(allQuestions[k-1].answerCards.findIndex(i => i.filePath === 'img/a-'+k+'-1.png')));
-    }  
+    }
 }
 
 
@@ -138,12 +102,6 @@ function shuffling( array ){
      array[randomnumber] = temp
     }
 }
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// Hai's todo
-    //set correct answer func ???
-// if answer not correct do the animation buzzz if correct rotate the cards up.!!!!!!
-// animation card sending out
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 // Form Handler for username
@@ -157,9 +115,6 @@ function shuffling( array ){
 // localStorage---------------------------------------------------
 //  storage for highscores, usernames, which question the user is on, user's current score, # of incorrect answers
 // link to form for username, stingify
-var questionData = JSON.stringify(allQuestions);
-localStorage.setItem('questionData', questionData);
-
 
 // Event Listener and Click Handler-------------------------------
 //  username form, clicking on cards
@@ -181,7 +136,6 @@ function toggleSideBar(ref) {
     document.getElementById('sidebar').classList.toggle('active');
     
 };
-
 //======== End Nav Bar JS =====//
                                 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,61 +146,47 @@ function cardmove (card, x, y){
     cardEl.style.transform = 'translate('+x+', '+y+') rotate(720deg)';
 
 }
-
-/////////////////////////////////////////////////
-// var correctCardPosition = allQuestions[0].answerCards.findIndex(i => i.filePath === 'img/a-1-1.png');
-
-// function checkAnswer(card){
-//     var cardEl = document.getElementById(card);
-
-//     for (var i = 1; i < 6; i++ ){
-//         // var cardEl = document.getElementById('card'+i);
-//         // var correctCardPosition = allQuestions[i-1].answerCards.findIndex(x => x.filePath === 'img/a-'+i+'-1.png');
-//         if(correctCardPosition == i-1 && cardEl.id === 'card'+i){
-//             if(cardEl.id === 'card1'){
-//                 cardmove(card, '773px', '-324px');
-//             }else if(cardEl.id === 'card2'){
-//                 cardmove(card, '576px', '-324px');
-//             }else if(cardEl.id === 'card3'){
-//                 cardmove(card, '382px', '-324px');
-//             }else if(cardEl.id === 'card4'){
-//                 cardmove(card, '188px', '-324px');
-//             }else if(cardEl.id === 'card5'){
-//                 cardmove(card, '-9px', '-324px');
-//             }
-//         } else if(correctCardPosition == i-1 && cardEl.id !== 'card'+i){
-//             shake(card);
-//         }
-//     }
-
-// }
+//////////////////////////////////////////////////////////////////////////////////////////////////
 function checkAnswer(card){
     var cardEl = document.getElementById(card);
-    for(var k = 0; k < allQuestions.length; k++){
-        for(var j = 1; j < 9; j++){
-            var correctCardPosition = allQuestions[k].answerCards.findIndex(x => x.filePath === 'img/a-'+j+'-1.png');
-            for (var i = 1; i < 6; i++ ){
-                // var cardEl = document.getElementById('card'+i);
-                if(correctCardPosition == i-1 && cardEl.id === 'card'+i){
-                    if(cardEl.id === 'card1'){
-                        cardmove(card, '736px', '-322px');
-                    }else if(cardEl.id === 'card2'){
-                        cardmove(card, '539px', '-322px');
-                    }else if(cardEl.id === 'card3'){
-                        cardmove(card, '345px', '-322px');
-                    }else if(cardEl.id === 'card4'){
-                        cardmove(card, '151px', '-322px');
-                    }else if(cardEl.id === 'card5'){
-                        cardmove(card, '-46px', '-322px');
-                    }
-                } else if(correctCardPosition == i-1 && cardEl.id !== 'card'+i){
-                    shake(card);
+    for(var k = currentQuestion; k < (1+currentQuestion); k++){
+        var correctCardPosition = allQuestions[k].answerCards.findIndex(x => x.filePath === 'img/a-'+(k+1)+'-1.png');
+        for (var i = 1; i < 6; i++ ){
+            if((correctCardPosition+1) === i && cardEl.id == 'card'+i){
+                console.log(cardEl.id);
+                if(cardEl.id === 'card1'){// possibly keeping tally here!
+                    cardmove(card, '752px', '-322px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    return(currentQuestion++);
+                }else if(cardEl.id === 'card2'){
+                    cardmove(card, '557px', '-322px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    return(currentQuestion++);
+                }else if(cardEl.id === 'card3'){
+                    cardmove(card, '370px', '-322px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    return(currentQuestion++);
+                }else if(cardEl.id === 'card4'){
+                    cardmove(card, '182px', '-322px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    return(currentQuestion++);
+                }else if(cardEl.id === 'card5'){
+                    cardmove(card, '-12px', '-322px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    return(currentQuestion++);
                 }
-
+            }else if(correctCardPosition+1 === i && cardEl.id !== 'card'+i){
+               shake(card);
+               var setTally = localStorage.setItem('incorrectTally' , JSON.stringify(incorrectTally+1));
+               if(incorrectTally >1){
+                   alert('GAME OVER!!!!!!!!!!!!!!!');
+                   localStorage.clear();
+                   location.reload();
+                }
+                return(incorrectTally++);
+            }
         }
-    }return;
     }
-
 }
 
 function shake(card){
@@ -258,14 +198,25 @@ function shake(card){
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-// need make button, event listener, event handler
+if(currentQuestion === 15){
+    window.location.href = "about.html";
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
 function renderAll(){
     genQuestionCard();
     genAnswerCards();
-    allQuestions[0].displayQuestion();
-    displayCards();
-    // for(var i = 0; i < 15; i++){
+    displayQuestion(currentQuestion);
+    displayCards(currentQuestion);
     displayDeck();
-    // }
+
 }
 renderAll();
+var buttonFunc = function() {
+    location.reload();
+    displayQuestion(currentQuestion);
+    displayCards(currentQuestion);
+    displayDeck();
+
+}
+document.getElementById("deck-button").addEventListener("click", buttonFunc);
+// debugger
