@@ -52,9 +52,9 @@ var genAnswerCards = function(){
 }
 // genAnswerCards(); //testing and it work! need to make a loop or stick this somnewhere.
 
-Question.prototype.displayQuestion = function(){
+var displayQuestion = function(Qnum){
     var questEl = document.getElementById('questions-field');
-    questEl.src = this.filePath
+    questEl.src = "img/q-"+(Qnum+1)+".png";
 }
 // allQuestions[0].displayQuestion();
 
@@ -88,7 +88,7 @@ function displayDeck(){ // displaying the deck card color accordingly
 // debugger
 // var displayCards = function() {
 //     for(var k = 0; k < allQuestions.length; k++){
-//         while(allQuestions[k]){
+//         w++hile(allQuestions[k]){
 //             // for(var i = 0; i< 15; i++){
 //             shuffling(allQuestions[k].answerCards);
 //             if(allQuestions[k].answerCards.findIndex(i => i.filePath === 'img/a-'+(k+1)+'-1.png') > 4){//look here
@@ -108,22 +108,19 @@ function displayDeck(){ // displaying the deck card color accordingly
 // }
 // displayCards();
 
-var displayCards = function(){
-    for(var k = 1; k < allQuestions.length+1; k++){
-        shuffling(allQuestions[k-1].answerCards);
-        for(var j = 1; j < 6; j++){
-            var cardEl = document.getElementById('card'+j);
-            cardEl.src = allQuestions[k-1].answerCards[j-1].filePath;
-        }
-        while(allQuestions[k-1].answerCards.findIndex(i => i.filePath === 'img/a-'+k+'-1.png') > 4){
-            shuffling(allQuestions[k-1].answerCards);
-            for(var j = 1; j < 6; j++){
-                var cardEl = document.getElementById('card'+j);
-                cardEl.src = allQuestions[k-1].answerCards[j-1].filePath;
-            }
-        }
-        return(console.log(allQuestions[k-1].answerCards.findIndex(i => i.filePath === 'img/a-'+k+'-1.png')));
-    }  
+var displayCards = function(Qnum){ // from 0-14
+    shuffling(allQuestions[Qnum].answerCards);
+    for(var i = 1; i< 6; i++){
+        var cardEl = document.getElementById('card'+i);
+        cardEl.src = allQuestions[Qnum].answerCards[i-1].filePath;
+    }
+    while(allQuestions[Qnum].answerCards.findIndex(i => i.filePath === 'img/a-'+(Qnum+1)+'-1.png') > 4){
+        shuffling(allQuestions[Qnum].answerCards);
+        for(var i = 1; i< 6; i++){
+            var cardEl = document.getElementById('card'+i);
+            cardEl.src = allQuestions[Qnum].answerCards[i-1].filePath;
+    }
+}
 }
 
 
@@ -157,8 +154,7 @@ function shuffling( array ){
 // localStorage---------------------------------------------------
 //  storage for highscores, usernames, which question the user is on, user's current score, # of incorrect answers
 // link to form for username, stingify
-var questionData = JSON.stringify(allQuestions);
-localStorage.setItem('questionData', questionData);
+// localStorage.setItem('questionData', questionData);
 
 
 // Event Listener and Click Handler-------------------------------
@@ -204,7 +200,7 @@ function cardmove (card, x, y){
 //         // var correctCardPosition = allQuestions[i-1].answerCards.findIndex(x => x.filePath === 'img/a-'+i+'-1.png');
 //         if(correctCardPosition == i-1 && cardEl.id === 'card'+i){
 //             if(cardEl.id === 'card1'){
-//                 cardmove(card, '773px', '-324px');
+    //                 cardmove(card, '773px', '-324px');
 //             }else if(cardEl.id === 'card2'){
 //                 cardmove(card, '576px', '-324px');
 //             }else if(cardEl.id === 'card3'){
@@ -215,19 +211,19 @@ function cardmove (card, x, y){
 //                 cardmove(card, '-9px', '-324px');
 //             }
 //         } else if(correctCardPosition == i-1 && cardEl.id !== 'card'+i){
-//             shake(card);
+    //             shake(card);
 //         }
 //     }
 
 // }
 function checkAnswer(card){
     var cardEl = document.getElementById(card);
+    var correctCardPosition;
     for(var k = 0; k < allQuestions.length; k++){
-        for(var j = 1; j < 9; j++){
-            var correctCardPosition = allQuestions[k].answerCards.findIndex(x => x.filePath === 'img/a-'+j+'-1.png');
-            for (var i = 1; i < 6; i++ ){
+            correctCardPosition = allQuestions[k].answerCards.findIndex(x => x.filePath === 'img/a-'+(k)+'-1.png');
+            for (var i = 0; i < 5; i++ ){
                 // var cardEl = document.getElementById('card'+i);
-                if(correctCardPosition == i-1 && cardEl.id === 'card'+i){
+                if(correctCardPosition === i && cardEl.id === card) {
                     if(cardEl.id === 'card1'){
                         cardmove(card, '736px', '-322px');
                     }else if(cardEl.id === 'card2'){
@@ -243,9 +239,9 @@ function checkAnswer(card){
                     shake(card);
                 }
 
-        }
+                
     }return;
-    }
+}
 
 }
 
@@ -259,13 +255,56 @@ function shake(card){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // need make button, event listener, event handler
+// genQuestionCard(); //done
+// genAnswerCards();
+// function renderAll(Qnum){
+    //     displayQuestion(Qnum); //done
+    //     displayCards(Qnum);
+    //     // for(var i = 0; i < 15; i++){
+        //     displayDeck();
+        //     // }
+        // }
+        // // renderAll(0);
+        // debugger;
+        // var buttonFunc = function() {
+            //     if (document.getElementById('questions-field').src !== '') {
+                //         renderAll(i);
+                //         i++;
+                //     }
+                //     else {
+                    //         var i = 1;
+                    //         renderAll(0);
+                    // }}
+var currentQuestion = 0;
 function renderAll(){
-    genQuestionCard();
-    genAnswerCards();
-    allQuestions[0].displayQuestion();
-    displayCards();
-    // for(var i = 0; i < 15; i++){
-    displayDeck();
-    // }
+    if (!localStorage.currentQ) {
+        localStorage.setItem('currentQ', '1');
+        genQuestionCard();
+        genAnswerCards();
+        displayQuestion(currentQuestion);
+        displayCards(0);
+        displayDeck();
+    }
+    else {
+        var currentQuestion = parseInt(localStorage.getItem('currentQ'));
+        currentQuestion++;
+        displayQuestion(currentQuestion);
+        displayCards(currentQuestion);
+        displayDeck();
+    }
 }
+var questionData;
 renderAll();
+
+var buttonFunc = function() {
+    currentQuesiton++;
+    var Qnum = localStorage.getItem('currentQ');
+    Qnum = parseInt(Qnum) + 1;
+    localStorage.setItem('currentQ', Qnum);
+
+    displayQuestion(currentQuestion);
+    displayCards(currentQuestion);
+    displayDeck();
+}
+
+document.getElementById("deck-button").addEventListener("click", buttonFunc);
