@@ -1,21 +1,33 @@
+* {
+    font-family: "Monaco", sans-serif;
+    font-size: 16px;
+}
+
+
 /*======= Banner =======*/
+
 .center {
     display: block;
     max-width: 300px;
     margin: 0 auto;
     width: 90%;
 }
+
+
 /*======Nav-Bar for Play.this======*/
+
 a {
     color: aliceblue;
     text-decoration: none;
 }
+
 nav ul {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
     font-family: "Monaco", sans-serif;
 }
+
 #sidebar ul li {
     color: #ccc;
     font-size: 20px;
@@ -24,6 +36,7 @@ nav ul {
     border-bottom: 1px solid #3e3e3e;
     line-height: 50px;
 }
+
 body {
     background: repeating-linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
 }
@@ -32,6 +45,7 @@ body {
     height: 40px;
     font-size: 14pt;
 }
+
 #user-name {
     font-size: 25px;
     display: block;
@@ -40,12 +54,14 @@ body {
     width: 90%;
     color: rgba(205, 77, 77, 0.882);
 }
+
 #clear-name {
     display: block;
     max-width: 150px;
     margin: 0 auto;
     width: 90%;
 }
+
 #sidebar {
     position: absolute;
     top: 0px;
@@ -58,16 +74,19 @@ body {
     transform: perspective(200px) rotateY(90deg);
     transition: all 400ms ease;
 }
+
 #toggle-btn {
     position: absolute;
     left: 30px;
     top: 20px;
     transition: left 200ms linear 0ms, transform 300ms ease 100ms;
 }
+
 #toggle-btn.active {
     left: 200px;
     transform: rotate(360deg);
 }
+
 #toggle-btn span {
     position: relative;
     top: 0px;
@@ -79,22 +98,31 @@ body {
     cursor: pointer;
     transition: tr ansform 300ms ease 200ms;
 }
+
 #toggle-btn.active span:nth-child(1) {
     top: 10px;
     transform: rotate(45deg);
 }
+
 #toggle-btn.active span:nth-child(2) {
     opacity: 0;
 }
+
 #toggle-btn.active span:nth-child(3) {
     top: -10px;
     transform: rotate(-45deg);
 }
+
 #sidebar.active {
     transform: perspective(200px) rotateY(0deg);
 }
+
+
 /*==========End Nav Bar======*/
+
+
 /*==========Game Screen Layout==========*/
+
 header ul {
     width: 960px;
     margin: 0px auto;
@@ -102,9 +130,11 @@ header ul {
     padding-left: 10%;
     padding-right: 10%;
 }
+
 header ul li {
     display: inline-block;
 }
+<<<<<<< Updated upstream
 #info-bar {
     height: 70px;
 }
@@ -150,6 +180,9 @@ header ul li {
     width: 70px;
     margin: 3px 15px;
 }
+=======
+
+>>>>>>> Stashed changes
 main ul {
     width: 960px;
     margin: 0px auto 0px auto;
@@ -157,41 +190,54 @@ main ul {
     padding-right: 10%;
     list-style-type: none;
 }
+
 main ul li {
     display: inline-block;
     margin: 0px 7px;
     height: 270px;
     background-color: #585555
 }
+
 main ul li:first-child {
     margin: 0px 10px 0px 0px
 }
+
 main ul li:last-child {
     margin: 0px 0px 0px 10px
 }
+
 main ul li {
     display: inline-block;
     margin: 0px 4px;
 }
+
+
 /*  */
+
 #card-deck {
     border: 1px black solid;
     border-radius: 20px;
     height: 270px;
     width: 176px;
 }
+
 #questions-field {
     border: 1px black solid;
     border-radius: 20px;
     height: 350px;
     width: 540px;
 }
+
 #card-choice {
     border: 8px groove #a59e99;
     height: 270px;
     width: 174px;
 }
+<<<<<<< Updated upstream
     /* ===== Animations ====== */
+=======
+
+>>>>>>> Stashed changes
 @keyframes shake {
     0% {
         transform: translate(1px, 1px) rotate(0deg);
@@ -227,6 +273,7 @@ main ul li {
         transform: translate(1px, -2px) rotate(-1deg);
     }
 }
+
 #card1,
 #card2,
 #card3,
@@ -238,6 +285,7 @@ main ul li {
     /* transform: translate(0px, 0px) rotate(360deg); */
     /* transition: transform 0.5s ease-in-out 0.1s; */
 }
+
 @keyframes fade-in-right {
     from {
         opacity: 0;
@@ -248,39 +296,74 @@ main ul li {
         transform: translateX(0);
     }
 }
+
+
 /*====== About Us ======*/
+
 #body-about-color {
     display: block;
-    max-width: 300px;
+    max-width: 380px;
     margin: 0 auto;
     width: 90%;
     padding-top: 200px;
     color: gray;
     font-size: 40px;
 }
+
 #background-about {
-    background: rgb(189, 20, 20);
-    background: -moz-radial-gradient(circle, rgba(189, 20, 20, 1) 0%, rgba(215, 215, 214, 1) 0%, rgba(159, 179, 159, 1) 100%);
-    background: -webkit-radial-gradient(circle, rgba(189, 20, 20, 1) 0%, rgba(215, 215, 214, 1) 0%, rgba(159, 179, 159, 1) 100%);
-    background: radial-gradient(circle, rgba(189, 20, 20, 1) 0%, rgba(215, 215, 214, 1) 0%, rgba(159, 179, 159, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#bd1414", endColorstr="#9fb39f", GradientType=1);
+    background: rgb(47, 78, 78);
+    background: -moz-radial-gradient(circle, rgba(47, 78, 78, 1) 0%, rgba(70, 70, 59, 1) 59%, rgba(44, 43, 43, 1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(47, 78, 78, 1) 0%, rgba(70, 70, 59, 1) 59%, rgba(44, 43, 43, 1) 100%);
+    background: radial-gradient(circle, rgba(47, 78, 78, 1) 0%, rgba(70, 70, 59, 1) 59%, rgba(44, 43, 43, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#2f4e4e", endColorstr="#2c2b2b", GradientType=1);
 }
+
 #mission-statement {
-    margin: 0 auto;
-    padding-top: 50px;
-    color: rgb(80, 73, 73);
-    font-size: 30px;
-    /* text-indent: 50px; */
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: "monaco", sans-serif;
+    color: rgb(234, 234, 234);
+    font-size: 18px;
+}
+
+.left {
+    float: left;
+    padding: 0px 20px 20px 0;
+    width: 7%;
+    height: auto;
+}
+
+#developer-statement {
     list-style-type: none;
 }
-#mission-center{
+
+#developer-statement p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    padding-top: 50px;
+    color: rgb(192, 214, 200);
+    font-size: 14px;
+    text-indent: 50px;
+    list-style-type: none;
+}
+
+#mission-center {
     width: 700px;
     text-align: center;
     margin: 25px auto;
     list-style-type: none;
     font-size: 19px;
 }
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 /* background */
+
 body {
     background: linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
 }
