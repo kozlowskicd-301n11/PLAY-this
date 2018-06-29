@@ -1,98 +1,95 @@
 'use strict'
-
-//======== Nav-Bar JS =======//
-
-function toggleSideBar(ref) {
-    ref.classList.toggle('active');
-    document.getElementById('sidebar').classList.toggle('active');
-
-};
-
-//======== End Nav Bar JS =====//
-
-var allCards = [];
-
-var Card = function(index, filePath, language, correctAnswer) {
-    this.index = index; // index number to track all cards
-    this.filePath = filePath;
-    this.language = language; // html, js, css
-    this.correctAnswer = correctAnswer;
-    allCards.push(this);
-}
 ////////////////////////////////////////////////
+// debugger;
+var allQuestions = [];
+var currentQuestion = 0;
+var getCurrentQ = localStorage.getItem('currentQuestion');
+currentQuestion = JSON.parse(getCurrentQ);
+if(!localStorage.currentQuestion){
+    var currentQuestion = 0;
+}
 
-var Question = function(index, filePath, language){ // should add a parameter 
-    this.index = index;
+var incorrectTally = 0;
+var getTally = localStorage.getItem('incorrectTally');
+var incorrectTally = JSON.parse(getTally);
+
+var Question = function(Qindex, filePath, language){ // should add a parameter if needed
+    this.Qindex = Qindex;
     this.filePath = filePath;
     this.language = language;
-    this.cards = [];
-    this.fillCards = function(){
-        
-    }
-    //protyope shuffle check for first 5 splice
-    Question.allQuestions.push(this);
+    this.answerCards = []; // Probably need to clear before pushing a new Answer's card so it doesnt stack up!
+    allQuestions.push(this);
 }
-Question.allQuestions = [];
-
-function genQuestionCard() {
-    new Question(1, 'img/js-q-1.png', 'JS');
+// Question.answerCards = [];
+////////////////////////////////////////////////////////////////////
+// Generate card into Question.answerCards []
+var Card = function(Aindex, filePath, language) {
+    this.Aindex = Aindex; // index number to track all cards
+    this.filePath = filePath;
+    this.language = language; // html, js, css
+    allQuestions[this.Aindex-1].answerCards.push(this); // Testing for the first value of array [0] will end up put in a loop or so to push all
 }
-genQuestionCard();
 
-function genAllCard() {
-    //question 1 card
-    for(var i = 1; i < 9; i++){
-        new Card(1,'img/js-a-1-'+i+'.png', 'JS', false);
-    }
+// Generating Question card
+function genQuestionCard(){
+    new Question(1,'img/q-1.png', 'HTML');
+    new Question(2,'img/q-2.png', 'CSS');
+    new Question(3,'img/q-3.png', 'JS');
+    new Question(4,'img/q-4.png', 'HTML');
+    new Question(5,'img/q-5.png', 'CSS');
+    new Question(6,'img/q-6.png', 'JS');
+    new Question(7,'img/q-7.png', 'HTML');
+    new Question(8,'img/q-8.png', 'CSS');
+    new Question(9,'img/q-9.png', 'JS');
+    new Question(10,'img/q-10.png', 'HTML');
+    new Question(11,'img/q-11.png', 'CSS');
+    new Question(12,'img/q-12.png', 'JS');
+    new Question(13,'img/q-13.png', 'HTML');
+    new Question(14,'img/q-14.png', 'CSS');
+    new Question(15,'img/q-15.png', 'JS');
+
 
 }
-genAllCard();
-
-function displayQuestion() {
-    for (var i = 1; i < Question.allQuestions.length + 1; i++) {
-        var questEl = document.getElementById('questions-field');
-        questEl.src = 'img/js-q-' + i + '.png';
-    }
-}
-displayQuestion();
-
-function setTrueAnswer(){ // setting boolean to true if answer is correct
-    for(var i = 0; i < allCards.length; i++){ // Checking Question #1
-        if(allCards[i].filePath === 'img/js-a-1-2.png'){
-            allCards[i].correctAnswer = true;
+// genQuestionCard();
+// debugger;
+// Generate answer cards and push them into the answerCards array
+var genAnswerCards = function(){
+    for(var i =1; i < allQuestions.length +1; i++){
+        for(var j =1; j<9 ; j++){
+            new Card(i, 'img/a-'+i+'-'+j+'.png', 'JS');
         }
     }
 }
-setTrueAnswer();
+var displayQuestion = function(Qnum){
+    var questEl = document.getElementById('questions-field');
+    questEl.src = "img/q-"+(Qnum+1)+".png";
+}
+function displayDeck (){ 
+    var deckcolor = document.getElementById('card-deck');
+    if(currentQuestion === 0 || currentQuestion === 3 || currentQuestion === 6 || currentQuestion === 9 || currentQuestion === 12){
+        deckcolor.src = "img/orangeCard.png";
+    }else if(currentQuestion === 1 || currentQuestion === 4 || currentQuestion === 7 || currentQuestion === 10 || currentQuestion === 13){
+        deckcolor.src = "img/blueCard.png";
+    }else if(currentQuestion === 2 || currentQuestion === 5 || currentQuestion === 8 || currentQuestion === 11 || currentQuestion === 14){
+        deckcolor.src = "img/greenCard.png";
+    }
+};
 
-
-
-function displayDeck() { // displaying the deck card color accordingly
-    for (var i = 0; i < Question.allQuestions.length; i++) {
-        var deckcolor = document.getElementById('card-deck');
-        if (Question.allQuestions[i].language === 'HTML') {
-            deckcolor.src = "img/orangeCard.png";
-        } else if (Question.allQuestions[i].language === 'CSS') {
-            deckcolor.src = "img/blueCard.png";
-        } else if (Question.allQuestions[i].language === 'JS') {
-            deckcolor.src = "img/greenCard.png";
+var displayCards = function(Qnum){ // from 0-14
+    shuffling(allQuestions[Qnum].answerCards);
+    for(var i = 1; i< 6; i++){
+        var cardEl = document.getElementById('card'+i);
+        cardEl.src = allQuestions[Qnum].answerCards[i-1].filePath;
+    }
+    while(allQuestions[Qnum].answerCards.findIndex(i => i.filePath === 'img/a-'+(Qnum+1)+'-1.png') > 4){
+        shuffling(allQuestions[Qnum].answerCards);
+        for(var i = 1; i< 6; i++){
+            var cardEl = document.getElementById('card'+i);
+            cardEl.src = allQuestions[Qnum].answerCards[i-1].filePath;
         }
     }
 }
-displayDeck();
-//set correct answer func 
-//while not in first 5 call shuffle
-// shuffling(allCards); 
-// display cards
-var displayCards = function() {
-    if (Question.allQuestions[0]) {
-        for (var i = 1; i < allCards.length - 1; i++) {
-            var cardEl = document.getElementById('card' + i);
-            cardEl.src = 'img/js-a-1-' + i + '.png';
-        }
-    }
-}
-displayCards();
+
 
 function shuffling( array ){
     var count = array.length,
@@ -104,81 +101,10 @@ function shuffling( array ){
      array[count] = array[randomnumber];
      array[randomnumber] = temp
     }
-    // allCards.push(this);
 }
 
-// make a randomizer !!!
-// look on how to change image using java to manipulate CSS
 
-
-
-
-
-
-
-
-
-
-
-
-
-// Card Constructors
-var cardBack = 'http://placehold.it/220x300/777';
-var cssCardContent = [
-    'rgb()',
-    '*',
-    ':first-child',
-    ':last-child',
-    ':nth-child',
-    'display: inline-block;',
-    'color:',
-    'margin:',
-    'padding:',
-    'border:',
-    'clear:',
-    'float: left;',
-    'float: right;',
-    'position: static;',
-    'position: absolute;',
-    'position: fixed;',
-    'font-family:',
-    'background-color:',
-    'line-height:',
-    'font-weight:'
-]
-var makeCssCards = function() {
-    for (var i = 0; i < cssCardContent.length; i++) {
-        new Card(i, 'css', cssCardContent[i], 'http://placehold.it/220x300/444');
-    }
-}
-
-// display cards
-
-// <<<<<<< nav-bar
-// var displayCards = function() {
-//         {
-//             var ele = document.getElementById('card-deck');
-//             ele.src = 'http://placehold.it/150x200/12345';
-//             for (var i = 0; i < 5; i++) {
-//                 var ele = document.getElementById('card' + String(i + 1))
-//                 ele.src = 'http://placehold.it/150x200/12345';
-//             }
-//         }
-//     }
 // Form Handler for username
-// =======
-// var displayCards = function() {
-//     {
-//         var ele = document.getElementById('card-deck');
-//         ele.src = 'http://placehold.it/150x200/12345';
-//         for (var i = 0; i < 5; i++) {
-//             var ele = document.getElementById('card' + String(i+1))
-//             ele.src = 'http://placehold.it/150x200/12345';
-//         }
-//     }
-// }
-// Form Handler for username
-// >>>>>>> master
 
 // Question and Answer Constructor--------------------------------
 //  needs to create question in the question-field id
@@ -188,6 +114,7 @@ var makeCssCards = function() {
 
 // localStorage---------------------------------------------------
 //  storage for highscores, usernames, which question the user is on, user's current score, # of incorrect answers
+// link to form for username, stingify
 
 // Event Listener and Click Handler-------------------------------
 //  username form, clicking on cards
@@ -199,56 +126,134 @@ var makeCssCards = function() {
 // DOM Manipulation------------------------------------------------
 //  display username
 //  display highscores
-// <<<<<<< nav-bar
 //  display explanation after answering question
-// =======
-//  display explanation after answering question
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////
-
-// function cardmove (card, x, y){
-//     var cardEl = document.getElementById(card);
-//     cardEl.style.transform = 'perspective( 1000px ) rotateY( 0deg )'
-//     cardEl.style.transform = 'translate('+x+', '+y+') rotate(720deg)';
-//     if(card === 'card1'){
-//         cardEl.setAttribute('onclick',"moveBack('card1')");
-//     }else if(card === 'card2'){
-//         cardEl.setAttribute('onclick',"moveBack('card2')");
-//     }else if(card === 'card3'){
-//         cardEl.setAttribute('onclick',"moveBack('card3')");
-//     }else if(card === 'card4'){
-//         cardEl.setAttribute('onclick',"moveBack('card4')");
-//     }else if(card === 'card5'){
-//         cardEl.setAttribute('onclick',"moveBack('card5')");
-//     }
-// }
-
-// // find a way to move card back if its not the right answer. 
-// function moveBack(card){
-//     var cardUl = document.getElementById(card)
-//     cardUl.style.transform = 'perspective( 1000px ) rotateY( 0deg )'
-//     cardUl.style.transform = 'translate(0px, 0px;) rotate(-1440deg)';
-// }
-
-// function answerCheck(){
-//     while(Question.allQuestions[0] && allCards[2]){
-//         cardmove(card, x, y)
-//     }
-// }
-
+// Animation moves card to the other deck
 
 //======== Nav-Bar JS =======//
 
 function toggleSideBar(ref) {
     ref.classList.toggle('active');
     document.getElementById('sidebar').classList.toggle('active');
-
+    
 };
+//======== End Nav Bar JS =====//
+                                
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function cardmove (card, x, y){
+    var cardEl = document.getElementById(card);
+    cardEl.style.transition = 'transform 0.5s ease-in-out 0.1s';
+    cardEl.style.transform = 'perspective( 1000px ) rotateY( 0deg )';
+    cardEl.style.transform = 'translate('+x+', '+y+') rotate(720deg)';
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function checkAnswer(card){
+    var cardEl = document.getElementById(card);
+    ////
+    var instructP = document.getElementById('insP');
+    ////
+    for(var k = currentQuestion; k < (1+currentQuestion); k++){
+        var correctCardPosition = allQuestions[k].answerCards.findIndex(x => x.filePath === 'img/a-'+(k+1)+'-1.png');
+        for (var i = 1; i < 6; i++ ){
+            if((correctCardPosition+1) === i && cardEl.id == 'card'+i){
+                console.log(cardEl.id);
+                if(cardEl.id === 'card1'){// possibly keeping tally here!
+                    cardmove(card, '752px', '-353px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    instructP.textContent = "~~~~~~~~You are correct!~~~~~~~ Click on the deck to continue!";
+                    return(currentQuestion++);
+                }else if(cardEl.id === 'card2'){
+                    cardmove(card, '557px', '-353px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    instructP.textContent = "~~~~~~~~You are correct!~~~~~~~ Click on the deck to continue!";
+                    return(currentQuestion++);
+                }else if(cardEl.id === 'card3'){
+                    cardmove(card, '370px', '-353px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    instructP.textContent = "~~~~~~~~You are correct!~~~~~~~ Click on the deck to continue!";
+                    return(currentQuestion++);
+                }else if(cardEl.id === 'card4'){
+                    cardmove(card, '182px', '-353px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    instructP.textContent = "~~~~~~~~You are correct!~~~~~~~ Click on the deck to continue!";
+                    return(currentQuestion++);
+                }else if(cardEl.id === 'card5'){
+                    cardmove(card, '-12px', '-353px');
+                    var setCurrentQ = localStorage.setItem('currentQuestion' , JSON.stringify(currentQuestion+1));
+                    instructP.textContent = "~~~~~~~~You are correct!~~~~~~~ Click on the deck to continue!";
+                    return(currentQuestion++);
+                }
+            }else if(correctCardPosition+1 === i && cardEl.id !== 'card'+i){
+                shake(card);
+                var setTally = localStorage.setItem('incorrectTally' , JSON.stringify(incorrectTally+1));
+               ///////////////
+               var wrong1 = document.getElementById('wrong1');
+               wrong1.src = "img/red-x.png";
+               if(incorrectTally === 1){
+                    var wrong2 = document.getElementById('wrong2');
+                    wrong2.src = "img/red-x.png";
+               }
+               ///////////////
+               if(incorrectTally === 2){
+                    var wrong3 = document.getElementById('wrong3');
+                    wrong3.src = "img/red-x.png";
+                    alert('!!!!!!!!!!!!!!!!!GAME OVER!!!!!!!!!!!!!!!!!');
+                   localStorage.removeItem('currentQuestion');
+                   localStorage.removeItem('incorrectTally');
+                   location.reload();
+                }
+
+                return(incorrectTally++);
+            }
+        }
+    }
+}
+
+function shake(card){
+    for (var i = 1; i < 6; i++ ){
+        var cardEl = document.getElementById(card);
+        cardEl.style.animation = 'shake 0.5s';
+        cardEl.style.animationIterationCount = '2s';
+    }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+if(currentQuestion === 15){
+    window.location.href = "about.html";
+}
+
+var getUser = localStorage.getItem('userName');
+
+var displayName = document.getElementById('form-name');
+displayName.textContent = JSON.parse(getUser);
+
+if(incorrectTally === 1){
+    var wrong1 = document.getElementById('wrong1');
+    wrong1.src = "img/red-x.png";
+}else if(incorrectTally === 2){
+    var wrong1 = document.getElementById('wrong1');
+    wrong1.src = "img/red-x.png";
+    var wrong2 = document.getElementById('wrong2');
+    wrong2.src = "img/red-x.png";
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function renderAll(){
+    genQuestionCard();
+    genAnswerCards();
+    displayQuestion(currentQuestion);
+    displayCards(currentQuestion);
+    displayDeck();
+
+}
+renderAll();
+var buttonFunc = function() {
+    displayQuestion(currentQuestion);
+    displayCards(currentQuestion);
+    displayDeck();
+
+}
+document.getElementById("deck-button").addEventListener("click", buttonFunc);
+// debugger
