@@ -16,7 +16,7 @@ GIMP will provide quick service to the developer for adding text to the white si
 
 Pixelmator provides the opportunity to work seamlessly with little downtime on OSX and png files to upload to GitHub.
 
-###TODO
+### TODO
 
 TODO -
 As a developer, I want to think of a name for the game 
