@@ -250,6 +250,7 @@ function renderAll(){
 }
 renderAll();
 var buttonFunc = function() {
+    location.reload();
     displayQuestion(currentQuestion);
     displayCards(currentQuestion);
     displayDeck();
