@@ -4,20 +4,6 @@ function toggleSideBar(ref) {
     document.getElementById('sidebar').classList.toggle('active');
     
 };
-//////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function startHandler(){
     event.preventDefault();
@@ -35,4 +21,4 @@ function clearNameHandler(){
     localStorage.removeItem('userName');
 }
 var clearButtion = document.getElementById('clear-name').addEventListener('click', clearNameHandler);
-// debugger
+
