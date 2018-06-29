@@ -104,9 +104,54 @@ header ul {
 header ul li {
     display: inline-block;
 }
+#info-bar {
+    height: 70px;
+}
+#gameUserName {
+    float: left;
+    border: 1px black solid;
+    width: 300px;
+    height: 65px;
+    margin-right: 12px;
+}
+#form-name {
+    display: block;
+    line-height: 24px;
+    color: aliceblue;
+    font-family: "Monaco", sans-serif;
+    font-size: 24px;
+    text-align: center; 
+}
+#instructions {
+    position: absolute;
+    border: 1px red solid;
+    width: 300px;
+    height: 65px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 15px;
+    margin-left: 9px;
+}
+#instructions p{
+    color: aliceblue;
+    line-height: 30px;
+    margin: 5px;
+}
+#wrong-answers {
+    float: right;
+    width: 300px;
+    height: 65px;
+    margin-right: 20px;
+}
+#wrong-answers img {
+    display: inline-block;
+    height: 60px;
+    width: 70px;
+    margin: 3px 15px;
+}
 main ul {
     width: 960px;
-    margin: 40px auto 0px auto;
+    margin: 0px auto 0px auto;
     padding-left: 10%;
     padding-right: 10%;
     list-style-type: none;
@@ -145,6 +190,7 @@ main ul li {
     height: 270px;
     width: 174px;
 }
+    /* ===== Animations ====== */
 @keyframes shake {
     0% {
         transform: translate(1px, 1px) rotate(0deg);
@@ -233,7 +279,6 @@ main ul li {
     list-style-type: none;
     font-size: 19px;
 }
-
 /* background */
 body {
     background: linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
