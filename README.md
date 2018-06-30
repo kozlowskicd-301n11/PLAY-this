@@ -21,11 +21,11 @@ Pixelmator provides the opportunity to work seamlessly with little downtime on O
 TODO -
 * As a developer, I want to think of a name for the game 
 * As a developer, I want to develop questions for the user to interact and learn HTML, CSS, and JavaScript
-* As a developer, I want to create a wireframe with placeholder of images to have the structure and foundation stable for adding content
+* As a developer, I want to create a wireframe with a placeholder of images to have the structure and foundation stable for adding content
 * As a developer, I want to create a constructor for the questions that will convert them to objects and display it to the user by using object array for answers sorted by HTML, CSS, and JavaScript
-* As a developer, I want to create a logic for checking the responses from the user input the logic for checking answer
-* As a developer, I want to create an event handler and event listener for the users name and store it in a local storage.
-* As a developer, I want to manipulate the DOM for listing the score and presenting it the user as a correct choice or incorrect choice
+* As a developer, I want to create a logic for checking the responses from the user input by checking the answer and matching if it is strictly equal
+* As a developer, I want to create an event handler and event listener for the username and store it in a local storage.
+* As a developer, I want to manipulate the DOM for listing the score and presenting it to the user as a correct choice or incorrect choice
 * As a developer, I want to give the user three opportunities to complete the game without losing; however, if the answer is incorrect a red X will appear
 
 ### Installing
