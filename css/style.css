@@ -284,3 +284,62 @@ main ul li {
 body {
     background: linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
 }
+/*====== About Us ======*/
+#body-about-color {
+    display: block;
+    max-width: 280px;
+    margin: 0 auto;
+    width: 90%;
+    padding-top: 200px;
+    color: rgb(175, 175, 175);
+    font-size: 30px;
+}
+#background-about {
+    background: rgb(47, 78, 78);
+    background: -moz-radial-gradient(circle, rgba(47, 78, 78, 1) 0%, rgba(70, 70, 59, 1) 59%, rgba(44, 43, 43, 1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(47, 78, 78, 1) 0%, rgba(70, 70, 59, 1) 59%, rgba(44, 43, 43, 1) 100%);
+    background: radial-gradient(circle, rgba(47, 78, 78, 1) 0%, rgba(70, 70, 59, 1) 59%, rgba(44, 43, 43, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#2f4e4e", endColorstr="#2c2b2b", GradientType=1);
+}
+#mission-statement {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-family: "monaco", sans-serif;
+    color: rgb(234, 234, 234);
+    font-size: 16px;
+}
+.left {
+    float: left;
+    padding: 0px 30px 0px 0;
+    width: 7%;
+    height: auto;
+}
+#developer-statement {
+    list-style-type: none;
+}
+#developer-statement p {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding-top: 50px;
+    color: rgb(192, 214, 200);
+    font-size: 14px;
+    text-indent: 50px;
+    max-width: 1210px;
+    list-style-type: none;
+}
+#mission-center {
+    width: 700px;
+    text-align: center;
+    margin: 25px auto;
+    list-style-type: none;
+    font-size: 16px;
+}
+/*  */
+#card-choice p {
+    position: absolute;
+    top: 150px;
+    color: aliceblue;
+    width: 200px;
+}
