@@ -18,7 +18,7 @@ var startButton = document.getElementById('submit').addEventListener('click', st
 
 function clearNameHandler(){
     event.preventDefault();
-    localStorage.removeItem('userName');
+    localStorage.clear();
 }
 var clearButtion = document.getElementById('clear-name').addEventListener('click', clearNameHandler);
 
