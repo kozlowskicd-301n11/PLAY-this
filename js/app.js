@@ -9,6 +9,9 @@ if(!localStorage.currentQuestion){
     var currentQuestion = 0;
 }
 
+var tallyPoint = document.getElementById('score');
+tallyPoint.textContent = 'Current Score: '+currentQuestion*100;
+
 var incorrectTally = 0;
 var getTally = localStorage.getItem('incorrectTally');
 var incorrectTally = JSON.parse(getTally);
