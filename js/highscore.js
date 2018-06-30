@@ -21,3 +21,4 @@ function clearNameHandler(){
     localStorage.removeItem('userName');
 }
 var clearButtion = document.getElementById('clear-name').addEventListener('click', clearNameHandler);
+

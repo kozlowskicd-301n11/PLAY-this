@@ -1,3 +1,6 @@
+* {
+    font-family: "Monaco", sans-serif;
+}
 /*======= Banner =======*/
 .center {
     display: block;
@@ -191,6 +194,11 @@ main ul li {
     height: 270px;
     width: 174px;
 }
+#card-choice p {
+    position: absolute;
+    top: 150px;
+    color: aliceblue;
+}
     /* ===== Animations ====== */
 @keyframes shake {
     0% {
@@ -283,4 +291,7 @@ main ul li {
 /* background */
 body {
     background: linear-gradient(#2c2a2a, darkslategrey, #2c2a2a);
+}
+header p {
+
 }
